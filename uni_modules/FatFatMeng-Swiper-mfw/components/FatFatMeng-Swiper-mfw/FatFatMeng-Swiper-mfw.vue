@@ -2,22 +2,10 @@
 	<!-- 轮播图 -->
 	<view class="Swiper-mfw-index-box">
 		<view class="Swiper-mfw-index Swiper-box">
-			<swiper class="Swiper-mfw"
-			:circular="true"
-			:indicator-dots="false" 
-			:autoplay="autoplay" 
-			:interval="3000" 
-			:duration="1000"
-			:current="current"
-			:disable-touch="disable_touch"
-			@change="change"
-			>	
+			<swiper class="Swiper-mfw" :circular="true" :indicator-dots="false" :autoplay="autoplay" :interval="3000"
+				:duration="1000" :current="current" :disable-touch="disable_touch" @change="change">
 				<!-- 只需要前5条数据 -->
-				<swiper-item class="swiper-mfw-item"
-				v-if="index <= 4"
-				v-for="(item,index) in list"
-				:key="index"
-				>	
+				<swiper-item class="swiper-mfw-item" v-if="index <= 4" v-for="(item,index) in list" :key="index">
 					<!-- /*
 					 1. 这里不需要用api控制暂停视频
 					 2. 因为video标签上加了v-if="current==index"
@@ -26,24 +14,14 @@
 					 */ -->
 					<!-- 如果有视频，则显示视频-->
 					<template v-if="item.mp4 && current==index">
-						<video class="ImageVideo"
-						:id="'ImageVideo'+index"
-						:ref="'ImageVideo'+index"
-						:src="item.mp4"
-						:loop="true"
-						:muted="false"
-						:autoplay="current==index ? true : false"
-						:controls="false"
-						:show-fullscreen-btn="false"
-						:show-play-btn="false"
-						:enable-progress-gesture="false"
-						:play-strategy="0"
-						:poster="item.Image"
-						></video>
+						<video class="ImageVideo" :id="'ImageVideo'+index" :ref="'ImageVideo'+index" :src="item.mp4"
+							:loop="true" :muted="false" :autoplay="current==index ? true : false" :controls="false"
+							:show-fullscreen-btn="false" :show-play-btn="false" :enable-progress-gesture="false"
+							:play-strategy="0" :poster="item.Image"></video>
 					</template>
 					<!-- 否则显示图片 -->
 					<image v-else :src="item.Image" class="Image" mode="aspectFill"></image>
-					
+
 				</swiper-item>
 			</swiper>
 			<!-- 指示器 [Top] -->
@@ -77,12 +55,8 @@
 				<view class="Bottom-datall">
 					<!-- 指示器 [轮播信息 -> 标题,用户,头像,所在地] -->
 					<view class="Swiper-indicator-Top">
-						<view class="Top-item"
-						v-if="current==index"
-						:class="current==index ? 'current':'no' "
-						v-for="(item,index) in list"
-						:key="index"
-						>	
+						<view class="Top-item" v-if="current==index" :class="current==index ? 'current':'no' "
+							v-for="(item,index) in list" :key="index">
 							<!-- 如果存在视频，则显示“视频预览”提示 -->
 							<view v-if="item.mp4" class="Top-ImageVideo">
 								<!-- icon图标 -->
@@ -129,14 +103,8 @@
 						<view class="Bottom-left-Imagelist">
 							<!-- 只需要前5条数据 -->
 							<!-- 指示图(小图模式) -->
-							<view class="Bottom-item"
-							v-if="Number(index) <= 4"
-							:class="current==index ? 'current':'no'"
-							v-for="(item,index) in list"
-							:key="index"
-							
-							@click="SwiperIndTap(index)"
-							>
+							<view class="Bottom-item" v-if="Number(index) <= 4" :class="current==index ? 'current':'no'"
+								v-for="(item,index) in list" :key="index" @click="SwiperIndTap(index)">
 								<image :src="item.Image" class="Image" mode="aspectFill"></image>
 							</view>
 						</view>
@@ -165,52 +133,52 @@
 
 <script>
 	export default {
-		name:"FatFatMeng-Swiper-mfw",
-		props:{
+		name: "FatFatMeng-Swiper-mfw",
+		props: {
 			// 轮播图 数据列表
-			list:{
-				type:Array,
-				default:[]
+			list: {
+				type: Array,
+				default: []
 			},
 			// 当前选中的项(指示器坐标位置)
-			current:{
-				type:Number,
-				default:0
+			current: {
+				type: Number,
+				default: 0
 			},
 			// 是否自动轮播
-			autoplay:{
-				type:Boolean,
-				default:false
+			autoplay: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
-			return {				
+			return {
 				// 是否禁止用户 touch 操作
-				disable_touch: false,//touch 用户划动引起swiper变化。
+				disable_touch: false, //touch 用户划动引起swiper变化。
 			};
 		},
-		watch:{
-			
+		watch: {
+
 		},
-		methods:{
+		methods: {
 			// current 改变时会触发 change 事件，event.detail = {current: current, source: source}
 			change(e) {
 				let index = e.detail.current
 				let event = {
 					current: index
 				}
-				this.$emit('change',event)
+				this.$emit('change', event)
 			},
 			// 手动点击了指示器[小图模式]
-			SwiperIndTap(e){
+			SwiperIndTap(e) {
 				let index = e
 				let event = {
 					current: index
 				}
-				this.$emit('change',event)
+				this.$emit('change', event)
 			},
 		},
-		beforeCreate(){
+		beforeCreate() {
 			// #ifdef APP-PLUS
 			const domModule = weex.requireModule('dom');
 			// APP NVUE下 加载字体图标
@@ -233,18 +201,35 @@
 </style>
 <style lang="scss">
 	@import '@/uni_modules/FatFatMeng-Swiper-mfw/static/css/iconfont.css';
-	.app-iconfont,.nvueiconfont {
+
+	.app-iconfont,
+	.nvueiconfont {
 		/* #ifdef APP-PLUS  */
-	    font-family: appiconfont;
+		font-family: appiconfont;
 		/* #endif */
 		font-size: 16px;
 		color: #333;
-		
+
 	}
-	.app-ttf{
+
+	.app-ttf {
 		/* #ifdef APP-PLUS  */
 		font-family: appttf;
 		/* #endif */
 		font-size: 16px;
+	}
+</style>
+
+<style lang="scss" scoped>
+	view,
+	scroll-view,
+	swiper-item {
+		display: flex;
+		flex-direction: column;
+		flex-shrink: 0;
+		flex-grow: 0;
+		flex-basis: auto;
+		align-items: stretch;
+		align-content: flex-start;
 	}
 </style>
