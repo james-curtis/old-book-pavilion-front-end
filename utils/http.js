@@ -1,12 +1,19 @@
-import axios from '@/js_sdk/luch-request'
+import Request from '@/js_sdk/luch-request/luch-request/index.js'
+import setting from '@/hooks/setting'
 
-const instance = axios.create();
+const {
+	apiUrl
+} = setting.useGlobalSetting()
+
+const instance = new Request({
+	baseURL: apiUrl
+});
+
 // 添加请求拦截器
 instance.interceptors.request.use(function(config) {
 	// 在发送请求之前做些什么
 	return config;
-}, function(error) {
-	// 对请求错误做些什么
+
 	return Promise.reject(error);
 });
 
@@ -21,6 +28,5 @@ instance.interceptors.response.use(function(response) {
 	return Promise.reject(error);
 });
 
-export {
-	http: instance
-}
+
+export const http = instance

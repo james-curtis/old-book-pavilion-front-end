@@ -6,7 +6,7 @@ const state = {
 			iconPath: 'home',
 			selectedIconPath: 'home-fill',
 			text: '首页',
-			pagePath: "/pages/index/index"
+			pagePath: "/pages/index/portal/portal"
 		},
 		{
 			iconPath: 'shopping-cart',

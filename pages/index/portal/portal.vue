@@ -9,20 +9,10 @@
 					</u-icon>
 				</view>
 				<FatFatMeng-Swiper-mfw class='' :list='data'></FatFatMeng-Swiper-mfw>
-				<u-grid :col='4' class='block' :border='false'>
-					<u-grid-item>
-						111
-					</u-grid-item>
-					<u-grid-item>
-						111
-					</u-grid-item>
-					<u-grid-item>
-						111
-					</u-grid-item>
-					<u-grid-item>
-						111
-					</u-grid-item>
-				</u-grid>
+				<view class="block">
+					<portal-grid></portal-grid>
+				</view>
+				<good-swiper></good-swiper>
 			</view>
 		</view>
 	</layout-default>
@@ -30,27 +20,40 @@
 
 <script>
 	import {
+		mapState
+	} from 'vuex'
+	import {
+		bannerList
+	} from '@/services/portal.js'
+	import GoodSwiper from './components/good-swiper.vue'
+	import {
 		Swiper_mfw_index_data
 	} from '@/uni_modules/FatFatMeng-Swiper-mfw/components/FatFatMeng-Swiper-mfw/index.js'
 	import LayoutDefault from '@/layouts/default/index.vue'
+	import PortalGrid from './components/grid.vue'
 	export default {
 		// 首页
 		name: 'IndexPortal',
 		components: {
-			LayoutDefault
+			LayoutDefault,
+			PortalGrid,
+			GoodSwiper
 		},
 		data() {
 			return {
-				data: Swiper_mfw_index_data
+				data: Swiper_mfw_index_data,
+				bannerList: [],
 			}
 		},
-		onLoad() {
-
+		computed: {
+			...mapState({
+				cooperationLink: s => s.config.portal.cooperationLink
+			})
 		},
-		beforeMount() {},
-		methods: {
-
-		}
+		async created() {
+			this.bannerList = await bannerList()
+		},
+		methods: {}
 	}
 </script>
 
@@ -58,6 +61,7 @@
 	.content-wrapper {
 		.block {
 			margin: 0 20rpx;
+			box-sizing: border-box;
 		}
 
 		.search-bar-block {
@@ -77,6 +81,14 @@
 
 		/deep/ .Swiper-mfw-index-box {
 			background-color: transparent;
+		}
+	}
+
+	.grid-nav {
+		.grid-nav--img {
+			width: 100rpx;
+			height: 100rpx;
+			margin-bottom: 10rpx;
 		}
 	}
 </style>

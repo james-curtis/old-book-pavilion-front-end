@@ -1,4 +1,4 @@
-import uView from "uview-ui";
+import uView from '@/uni_modules/uview-ui'
 
 export default {
 	install(vue) {

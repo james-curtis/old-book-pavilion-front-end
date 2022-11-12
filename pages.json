@@ -1,7 +1,7 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
+			"path": "pages/index/portal/portal",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -73,14 +73,10 @@
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
-	"easycom": {
-		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
-	},
-	"uniIdRouter": {},
 	"tabBar": {
 		"list": [{
 				"text": "首页",
-				"pagePath": "pages/index/index"
+				"pagePath": "pages/index/portal/portal"
 			}, {
 				"text": "购物车",
 				"pagePath": "pages/index/cart"
