@@ -60,7 +60,7 @@
 <style lang="scss" scoped>
 	.content-wrapper {
 		.block {
-			margin: 0 20rpx;
+			margin: 0 $app-page-gap;
 			box-sizing: border-box;
 		}
 
