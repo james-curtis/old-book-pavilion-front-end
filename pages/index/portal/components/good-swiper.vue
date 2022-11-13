@@ -1,6 +1,6 @@
 <template>
-	<view class="good-swiper-wrapper">
-		<u-sticky @fixed="onTabsFixed" h5-nav-height='44'>
+	<view class="good-swiper-wrapper" :style="goodSwiperWrapperStyle">
+		<u-sticky @fixed="onTabsFixed" offsetTop="44px" offsetTopForCheck='50px'>
 			<u-tabs-swiper ref="tabs" :list="goodSwipeList" :current="current" @change="onTabsChange"
 				:is-scroll='false'>
 			</u-tabs-swiper>
@@ -58,7 +58,8 @@
 				current: 0,
 				swiperCurrent: 0,
 				swiperScrollTop: 0,
-				scrollable: false
+				scrollable: false,
+				goodSwiperWrapperStyle: '',
 			}
 		},
 		props: {
@@ -67,11 +68,18 @@
 				required: true
 			}
 		},
-		watch: {},
+		watch: {
+			scrollable: {
+				immediate: true,
+				handler(val) {
+					this.goodSwiperWrapperStyle = `--delta-sticky-helper: ${val?'0px':'var(--unit-20rpx)'};`
+				}
+			}
+		},
 		computed: {
 			scrollTop() {
 				return this.swiperScrollTop + this.pageScrollTop
-			}
+			},
 		},
 		mounted() {},
 		methods: {
@@ -91,6 +99,8 @@
 				this.current = current;
 			},
 			onTabsFixed() {
+				// this.tabsSwiperClass = 'good-swiper-wrapper__tabs__fixed'
+				console.log(`onTabsFixed`);
 				this.scrollable = true
 				this.$emit('tabs-fixed')
 			},
@@ -101,18 +111,34 @@
 				this.$refs.swiper[this.current].scrollToTop()
 				this.$emit('scroll-to-top')
 				setTimeout(() => this.scrollable = false)
-			}
-		}
+			},
+		},
 	}
 </script>
 
 <style lang="scss" scoped>
+	.good-swiper-wrapper {
+		--unit-20rpx: 20rpx;
+	}
+
+	.good-swiper-wrapper__tabs__fixed {
+		position: fixed;
+		top: 44px;
+	}
+
 	.swiper {
 		// 80rpx是z-tabs里面固定高度
 		// 44px是uview中navbar固定高度
 		// 50px是uview中tabbar固定高度
 		// 48rpx是uview中tabbar的midButton固定高度
-		// 2px是防止检测不到吸顶
-		height: calc(100vh - 44px - 80rpx - 50px + 2px); // - 48rpx
+		// --delta-sticky-helper是防止检测不到吸顶，所以把页面加长一点
+		/* #ifdef MP-WEIXIN */
+		--delta-weixin: 48rpx;
+		/* #endif */
+		/* #ifndef MP-WEIXIN */
+		--delta-weixin: 0px;
+		/* #endif */
+		// height: calc(100vh - 44px - 80rpx - 50px + var(--delta-sticky-helper) - var(--delta-weixin)); // - 48rpx
+		height: calc(100vh - 44px - 80rpx - 50px); // - 48rpx
 	}
 </style>

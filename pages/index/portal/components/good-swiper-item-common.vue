@@ -2,7 +2,8 @@
 	<view class='item-common-wrapper'>
 		<z-paging ref="paging" :use-virtual-list='true' cell-height-mode="fixed" @scroll='onScoll' virtual-list-col='2'
 			:scrollable='scrollable' v-model="pagingList" @query="queryList" :paging-content-style="pagingContentStyle"
-			:refresher-complete-delay='300' :inner-list-style='innerListStyle' :inner-cell-style="innerCellStyle">
+			:safe-area-inset-bottom='true' :refresher-complete-delay='300' :inner-list-style='innerListStyle'
+			:inner-cell-style="innerCellStyle">
 			<template #cell='{item,index}'>
 				<good-list-item :good='item'></good-list-item>
 			</template>
@@ -58,10 +59,10 @@
 			},
 			scrollToTop() {
 				this.$refs.paging.scrollToTop(false)
-				/// 其实回顶的时候可以不用刷新
-				// this.$nextTick(() => {
-				// 	this.$refs.paging.reload(true)
-				// })
+				// 其实回顶的时候还是需要刷新，不然几个地方一起滚动太卡了
+				this.$nextTick(() => {
+					this.$refs.paging.reload(true)
+				})
 			},
 			onScoll(e) {
 				this.$emit('scoll', e)
