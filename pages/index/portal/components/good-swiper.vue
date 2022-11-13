@@ -1,6 +1,6 @@
 <template>
-	<view class="good-swiper-wrapper" :style="goodSwiperWrapperStyle">
-		<u-sticky @fixed="onTabsFixed" offsetTop="44px" offsetTopForCheck='50px'>
+	<view class="good-swiper-wrapper" :style="[goodSwiperWrapperStyle]">
+		<u-sticky @fixed="onTabsFixed" :offsetTop="`${topHeight}px`" :offsetTopForCheck='`${topHeight+2}px`'>
 			<u-tabs-swiper ref="tabs" :list="goodSwipeList" :current="current" @change="onTabsChange"
 				:is-scroll='false'>
 			</u-tabs-swiper>
@@ -34,6 +34,11 @@
 	import GoodSwiperItemLatestGoods from './good-swiper-item-latest-goods.vue'
 	import GoodSwiperItemSaleGoods from './good-swiper-item-sale-goods.vue'
 
+	import {
+		STATUS_BAR_HEIGHT,
+		NAVBAR_HEIGHT
+	} from '@/constant/page.js'
+
 	export default {
 		name: 'GoodSwiper',
 		components: {
@@ -59,7 +64,13 @@
 				swiperCurrent: 0,
 				swiperScrollTop: 0,
 				scrollable: false,
-				goodSwiperWrapperStyle: '',
+				goodSwiperWrapperStyle: {
+					'--delta-status-bar-height': `${STATUS_BAR_HEIGHT}px`
+				},
+				statusBarHeight: STATUS_BAR_HEIGHT,
+				navbarHeight: NAVBAR_HEIGHT,
+				topHeight: NAVBAR_HEIGHT + STATUS_BAR_HEIGHT,
+
 			}
 		},
 		props: {
@@ -68,20 +79,15 @@
 				required: true
 			}
 		},
-		watch: {
-			scrollable: {
-				immediate: true,
-				handler(val) {
-					this.goodSwiperWrapperStyle = `--delta-sticky-helper: ${val?'0px':'var(--unit-20rpx)'};`
-				}
-			}
-		},
+		watch: {},
 		computed: {
 			scrollTop() {
 				return this.swiperScrollTop + this.pageScrollTop
 			},
 		},
-		mounted() {},
+		mounted() {
+			console.log(`topHeight`, this.topHeight, uni.getSystemInfoSync().statusBarHeight);
+		},
 		methods: {
 			//tabs通知swiper切换
 			onTabsChange(index) {
@@ -121,24 +127,16 @@
 		--unit-20rpx: 20rpx;
 	}
 
-	.good-swiper-wrapper__tabs__fixed {
-		position: fixed;
-		top: 44px;
-	}
-
 	.swiper {
-		// 80rpx是z-tabs里面固定高度
-		// 44px是uview中navbar固定高度
+		// 44px IOS , 48px Android是uview中navbar固定高度
+		--delta-navbar-height: 48px;
+
+		// 80rpx是tabsSwiper里面固定高度
+		--delta-tabs-height: 80rpx;
+
 		// 50px是uview中tabbar固定高度
-		// 48rpx是uview中tabbar的midButton固定高度
-		// --delta-sticky-helper是防止检测不到吸顶，所以把页面加长一点
-		/* #ifdef MP-WEIXIN */
-		--delta-weixin: 48rpx;
-		/* #endif */
-		/* #ifndef MP-WEIXIN */
-		--delta-weixin: 0px;
-		/* #endif */
-		// height: calc(100vh - 44px - 80rpx - 50px + var(--delta-sticky-helper) - var(--delta-weixin)); // - 48rpx
-		height: calc(100vh - 44px - 80rpx - 50px); // - 48rpx
+		--delta-tabbar-height: 50px;
+
+		height: calc(100vh - var(--delta-status-bar-height) - var(--delta-navbar-height) - var(--delta-tabs-height) - var(--delta-tabbar-height));
 	}
 </style>

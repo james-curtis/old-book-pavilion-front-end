@@ -134,7 +134,7 @@
 			observeContent() {
 				this.disconnectObserver('contentObserver');
 				const contentObserver = this.createIntersectionObserver({
-					thresholds: [0.95, 0.98, 1]
+					thresholds: [0.95, 0.98, 0.99]
 				});
 				contentObserver.relativeToViewport({
 					top: -this.stickyTop
