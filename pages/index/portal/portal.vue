@@ -1,7 +1,7 @@
 <template>
 	<layout-default>
-		<view class="wrapper">
-			<location-header></location-header>
+		<location-header></location-header>
+		<view class="wrapper" v-show="isBlockShow">
 			<view class="content-wrapper">
 				<view class="search-bar-block block">
 					<search-bar class="search-bar" :disabled='true'></search-bar>
@@ -9,12 +9,13 @@
 					</u-icon>
 				</view>
 				<FatFatMeng-Swiper-mfw class='' :list='data'></FatFatMeng-Swiper-mfw>
-				<view class="block">
+				<view class="block" id="portal-grid">
 					<portal-grid></portal-grid>
 				</view>
-				<good-swiper></good-swiper>
 			</view>
 		</view>
+		<good-swiper @tabs-fixed='onTabsFixed' @scroll-to-top='onScrollToTop' :page-scroll-top='pageScrollTop'>
+		</good-swiper>
 	</layout-default>
 </template>
 
@@ -43,6 +44,8 @@
 			return {
 				data: Swiper_mfw_index_data,
 				bannerList: [],
+				isBlockShow: true,
+				pageScrollTop: 0
 			}
 		},
 		computed: {
@@ -53,7 +56,31 @@
 		async created() {
 			this.bannerList = await bannerList()
 		},
-		methods: {}
+		methods: {
+			onTabsFixed() {
+				this.isBlockShow = false
+			},
+			onScrollToTop() {
+				this.isBlockShow = true
+				this.$nextTick(() => {
+					uni.pageScrollTo({
+						selector: `#portal-grid`,
+						// scrollTop: 500,
+						duration: 0,
+						success() {
+							uni.pageScrollTo({
+								scrollTop: 0,
+								duration: 100
+							})
+						}
+					})
+				})
+			}
+		},
+		onPageScroll(e) {
+			if (this.isBlockShow)
+				this.pageScrollTop = e.scrollTop
+		},
 	}
 </script>
 

@@ -1,13 +1,11 @@
 <template>
-	<view>
-		<u-navbar :is-fixed='true' :border-bottom='false' :is-back='false'>
-			<view class="map-wrap slot-wrap">
-				<u-icon name="map-fill" size="32"></u-icon>
-				<text class="map-wrap-text">{{keyword}}</text>
-				<u-icon name="arrow-down-fill" color="#333" size="22"></u-icon>
-			</view>
-		</u-navbar>
-	</view>
+	<u-navbar :is-fixed='true' :border-bottom='false' :is-back='false'>
+		<view class="map-wrap slot-wrap">
+			<u-icon name="map-fill" size="32"></u-icon>
+			<text class="map-wrap-text">{{keyword}}</text>
+			<u-icon name="arrow-down-fill" color="#333" size="22"></u-icon>
+		</view>
+	</u-navbar>
 </template>
 
 <script>

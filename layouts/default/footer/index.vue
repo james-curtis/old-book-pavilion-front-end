@@ -1,5 +1,5 @@
 <template>
-	<u-tabbar :list='pageList' v-model='current' :mid-button='true'></u-tabbar>
+	<u-tabbar class='footer-tabbar' :list='pageList' v-model='current' :mid-button='true'></u-tabbar>
 </template>
 
 <script>
@@ -40,5 +40,12 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	.footer-tabbar {
+
+		// 防止中间凸出按钮遮挡图层
+		/deep/ .u-fixed-placeholder.safe-area-inset-bottom {
+			height: 50px #{!important};
+		}
+	}
 </style>
