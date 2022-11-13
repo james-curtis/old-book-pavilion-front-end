@@ -1,10 +1,10 @@
 <template>
 	<view class='item-common-wrapper'>
-		<z-paging ref="paging" :use-virtual-list='true' cell-height-mode="dynamic" @scroll='onScoll'
-			:virtualList.sync='virtualList' :scrollable='scrollable' v-model="pagingList" @query="queryList"
-			:paging-style='pagingStyle'>
+		<z-paging ref="paging" :use-virtual-list='true' cell-height-mode="fixed" @scroll='onScoll' virtual-list-col='2'
+			:scrollable='scrollable' v-model="pagingList" @query="queryList" :paging-content-style="pagingContentStyle"
+			:refresher-complete-delay='300' :inner-list-style='innerListStyle' :inner-cell-style="innerCellStyle">
 			<template #cell='{item,index}'>
-				<good-list-item :index='index'></good-list-item>
+				<good-list-item :good='item'></good-list-item>
 			</template>
 		</z-paging>
 	</view>
@@ -22,11 +22,19 @@
 		},
 		data() {
 			return {
-				pagingStyle: {
-					// height: 'calc(100vh - 44px - 40px - 50px)'
+				innerListStyle: {
+					'display': 'flex',
+					'flex-wrap': 'wrap',
+					'justify-content': 'space-between',
+					margin: '0 var(--app-page-gap)',
+				},
+				innerCellStyle: {
+					width: '48%'
+				},
+				pagingContentStyle: {
+					padding: '0 0 calc(var(--app-page-gap) * 2) 0'
 				},
 				pagingList: [],
-				virtualList: []
 			}
 		},
 		props: {
@@ -63,7 +71,5 @@
 </script>
 
 <style lang="scss" scoped>
-	.item-common-wrapper {
-		margin: 0 $app-page-gap;
-	}
+	.item-common-wrapper {}
 </style>

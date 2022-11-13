@@ -5,7 +5,7 @@
 				<u-loading #loading></u-loading>
 			</template>
 		</u-image>
-		<text class="ellipis_text">{{name}}</text>
+		<text class="ellipis_text">{{title}}</text>
 	</view>
 </template>
 
@@ -15,7 +15,7 @@
 		data() {
 			return {
 				img: '/static/logo.png',
-				name: 'item-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapper',
+				title: 'item-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapperitem-common-wrapper',
 				price: 16.00,
 				// 浏览量
 				views: 88,
@@ -24,6 +24,9 @@
 					name: '光速退学Y-_'
 				}
 			}
+		},
+		created() {
+			this.title = this.good.title
 		},
 		computed: {
 

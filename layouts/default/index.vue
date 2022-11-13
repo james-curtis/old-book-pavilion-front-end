@@ -1,5 +1,5 @@
 <template>
-	<view class='wrapper'>
+	<view class='layout-default-wrapper'>
 		<slot></slot>
 		<layout-default-footer></layout-default-footer>
 	</view>
@@ -15,5 +15,8 @@
 	}
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
+	.layout-default-wrapper {
+		--app-page-gap: #{$app-page-gap};
+	}
 </style>
