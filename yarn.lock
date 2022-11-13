@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-uview-ui@1.8.7:
-  version "1.8.7"
-  resolved "https://registry.npmmirror.com/uview-ui/-/uview-ui-1.8.7.tgz#e5b8868c0bce203ca1ae0300cbf378f8ffeb0793"
-  integrity sha512-5oOGf6NHiSTCj6/dklKjm8LCSJ7kov3azWEcloEYTTf2Mv+cbov/aARc/8QR0ce6y1hqEtwK/YkBkP+OVKuaWw==
+"dayjs@^1.11.6":
+  "integrity" "sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ=="
+  "resolved" "https://registry.npmmirror.com/dayjs/-/dayjs-1.11.6.tgz"
+  "version" "1.11.6"
