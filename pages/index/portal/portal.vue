@@ -65,19 +65,11 @@
 				this.$nextTick(() => {
 					uni.pageScrollTo({
 						scrollTop: 0,
-						duration: 100
+						duration: 100,
+						complete: () => {
+							this.pageScrollTop = 0
+						}
 					})
-					// uni.pageScrollTo({
-					// 	selector: `#portal-grid`,
-					// 	// scrollTop: 500,
-					// 	duration: 0,
-					// 	success() {
-					// 		uni.pageScrollTo({
-					// 			scrollTop: 0,
-					// 			duration: 100
-					// 		})
-					// 	}
-					// })
 				})
 			}
 		},
