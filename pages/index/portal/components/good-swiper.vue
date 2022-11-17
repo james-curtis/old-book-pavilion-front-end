@@ -1,6 +1,6 @@
 <template>
-	<view class="good-swiper-wrapper">
-		<u-sticky @fixed="onTabsFixed" h5-nav-height='44'>
+	<view class="good-swiper-wrapper" :style="[goodSwiperWrapperStyle]">
+		<u-sticky @fixed="onTabsFixed" :offsetTop="`${topHeight}px`" :offsetTopForCheck='`${topHeight+2}px`'>
 			<u-tabs-swiper ref="tabs" :list="goodSwipeList" :current="current" @change="onTabsChange"
 				:is-scroll='false'>
 			</u-tabs-swiper>
@@ -34,6 +34,11 @@
 	import GoodSwiperItemLatestGoods from './good-swiper-item-latest-goods.vue'
 	import GoodSwiperItemSaleGoods from './good-swiper-item-sale-goods.vue'
 
+	import {
+		STATUS_BAR_HEIGHT,
+		NAVBAR_HEIGHT
+	} from '@/constant/page.js'
+
 	export default {
 		name: 'GoodSwiper',
 		components: {
@@ -58,7 +63,14 @@
 				current: 0,
 				swiperCurrent: 0,
 				swiperScrollTop: 0,
-				scrollable: false
+				scrollable: false,
+				goodSwiperWrapperStyle: {
+					'--delta-status-bar-height': `${STATUS_BAR_HEIGHT}px`
+				},
+				statusBarHeight: STATUS_BAR_HEIGHT,
+				navbarHeight: NAVBAR_HEIGHT,
+				topHeight: NAVBAR_HEIGHT + STATUS_BAR_HEIGHT,
+
 			}
 		},
 		props: {
@@ -71,9 +83,11 @@
 		computed: {
 			scrollTop() {
 				return this.swiperScrollTop + this.pageScrollTop
-			}
+			},
 		},
-		mounted() {},
+		mounted() {
+			console.log(`topHeight`, this.topHeight, uni.getSystemInfoSync().statusBarHeight);
+		},
 		methods: {
 			//tabs通知swiper切换
 			onTabsChange(index) {
@@ -91,6 +105,8 @@
 				this.current = current;
 			},
 			onTabsFixed() {
+				// this.tabsSwiperClass = 'good-swiper-wrapper__tabs__fixed'
+				console.log(`onTabsFixed`);
 				this.scrollable = true
 				this.$emit('tabs-fixed')
 			},
@@ -101,18 +117,26 @@
 				this.$refs.swiper[this.current].scrollToTop()
 				this.$emit('scroll-to-top')
 				setTimeout(() => this.scrollable = false)
-			}
-		}
+			},
+		},
 	}
 </script>
 
 <style lang="scss" scoped>
+	.good-swiper-wrapper {
+		--unit-20rpx: 20rpx;
+	}
+
 	.swiper {
-		// 80rpx是z-tabs里面固定高度
-		// 44px是uview中navbar固定高度
+		// 44px IOS , 48px Android是uview中navbar固定高度
+		--delta-navbar-height: 48px;
+
+		// 80rpx是tabsSwiper里面固定高度
+		--delta-tabs-height: 80rpx;
+
 		// 50px是uview中tabbar固定高度
-		// 48rpx是uview中tabbar的midButton固定高度
-		// 2px是防止检测不到吸顶
-		height: calc(100vh - 44px - 80rpx - 50px + 2px); // - 48rpx
+		--delta-tabbar-height: 50px;
+
+		height: calc(100vh - var(--delta-status-bar-height) - var(--delta-navbar-height) - var(--delta-tabs-height) - var(--delta-tabbar-height));
 	}
 </style>

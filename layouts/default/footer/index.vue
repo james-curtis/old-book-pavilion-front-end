@@ -16,6 +16,9 @@
 				current: 0,
 			}
 		},
+		options: {
+			styleIsolation: 'shared'
+		},
 		computed: {
 			...mapState({
 				pageList: s => s.page.pageList

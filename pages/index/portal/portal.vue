@@ -64,14 +64,10 @@
 				this.isBlockShow = true
 				this.$nextTick(() => {
 					uni.pageScrollTo({
-						selector: `#portal-grid`,
-						// scrollTop: 500,
-						duration: 0,
-						success() {
-							uni.pageScrollTo({
-								scrollTop: 0,
-								duration: 100
-							})
+						scrollTop: 0,
+						duration: 100,
+						complete: () => {
+							this.pageScrollTop = 0
 						}
 					})
 				})
