@@ -134,13 +134,13 @@
 			observeContent() {
 				this.disconnectObserver('contentObserver');
 				const contentObserver = this.createIntersectionObserver({
-					thresholds: [0.95, 0.98, 0.99]
+					thresholds: [0.95, 0.98, 0.99, 1]
 				});
 				contentObserver.relativeToViewport({
 					top: -this.stickyTop
 				});
 				contentObserver.observe('.' + this.elClass, res => {
-					console.log(`contentObserver.observe`, res);
+					// console.log(`contentObserver.observe`, res);
 					if (!this.enable) return;
 					this.setFixed(res.boundingClientRect.top);
 				});

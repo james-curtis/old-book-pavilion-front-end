@@ -1,24 +1,20 @@
 <template>
 	<view class="good-swiper-wrapper" :style="[goodSwiperWrapperStyle]">
-		<u-sticky @fixed="onTabsFixed" :offsetTop="`${topHeight}px`" :offsetTopForCheck='`${topHeight+2}px`'>
-			<u-tabs-swiper ref="tabs" :list="goodSwipeList" :current="current" @change="onTabsChange"
-				:is-scroll='false'>
-			</u-tabs-swiper>
-		</u-sticky>
+		<!-- <u-sticky @fixed="onTabsFixed" :offsetTop="`${topHeight}px`" :offsetTopForCheck='`${topHeight+2}px`'> -->
+		<u-tabs-swiper ref="tabs" :class='[tabsClass]' :list="goodSwipeList" :current="current" @change="onTabsChange"
+			:is-scroll='false'>
+		</u-tabs-swiper>
+		<!-- </u-sticky> -->
 		<swiper class="swiper" :current="swiperCurrent" @transition="swiperTransition"
 			@animationfinish="swiperAnimationfinish">
 			<swiper-item class="swiper-item" v-for="item in goodSwipeList" :key="item.name">
-				<good-swiper-item-guess-like ref="swiper" @scroll='onScoll' :scrollable='scrollable'
-					v-if="item.name==='猜你喜欢'">
+				<good-swiper-item-guess-like ref="swiper" @scroll='onScoll' v-if="item.name==='猜你喜欢'">
 				</good-swiper-item-guess-like>
-				<good-swiper-item-hot-goods ref="swiper" @scroll='onScoll' :scrollable='scrollable'
-					v-if="item.name==='热门图书'">
+				<good-swiper-item-hot-goods ref="swiper" @scroll='onScoll' v-if="item.name==='热门图书'">
 				</good-swiper-item-hot-goods>
-				<good-swiper-item-latest-goods ref="swiper" @scroll='onScoll' :scrollable='scrollable'
-					v-if="item.name==='最新发布'">
+				<good-swiper-item-latest-goods ref="swiper" @scroll='onScoll' v-if="item.name==='最新发布'">
 				</good-swiper-item-latest-goods>
-				<good-swiper-item-sale-goods ref="swiper" @scroll='onScoll' :scrollable='scrollable'
-					v-if="item.name==='降价图书'">
+				<good-swiper-item-sale-goods ref="swiper" @scroll='onScoll' v-if="item.name==='降价图书'">
 				</good-swiper-item-sale-goods>
 			</swiper-item>
 		</swiper>
@@ -47,6 +43,14 @@
 			GoodSwiperItemLatestGoods,
 			GoodSwiperItemSaleGoods
 		},
+		inject: {
+			scrollable: {
+				from: 'swiperScrollable',
+				default: () => ({
+					value: false
+				})
+			}
+		},
 		data() {
 			return {
 				goodSwipeList: [{
@@ -63,14 +67,16 @@
 				current: 0,
 				swiperCurrent: 0,
 				swiperScrollTop: 0,
-				scrollable: false,
+				// scrollable: {
+				// 	value: false
+				// },
 				goodSwiperWrapperStyle: {
 					'--delta-status-bar-height': `${STATUS_BAR_HEIGHT}px`
 				},
 				statusBarHeight: STATUS_BAR_HEIGHT,
 				navbarHeight: NAVBAR_HEIGHT,
 				topHeight: NAVBAR_HEIGHT + STATUS_BAR_HEIGHT,
-
+				tabsClass: this.$u.guid(),
 			}
 		},
 		props: {
@@ -79,14 +85,13 @@
 				required: true
 			}
 		},
-		watch: {},
 		computed: {
 			scrollTop() {
 				return this.swiperScrollTop + this.pageScrollTop
 			},
 		},
 		mounted() {
-			console.log(`topHeight`, this.topHeight, uni.getSystemInfoSync().statusBarHeight);
+			this.initObserver()
 		},
 		methods: {
 			//tabs通知swiper切换
@@ -105,9 +110,8 @@
 				this.current = current;
 			},
 			onTabsFixed() {
-				// this.tabsSwiperClass = 'good-swiper-wrapper__tabs__fixed'
 				console.log(`onTabsFixed`);
-				this.scrollable = true
+				this.scrollable.value = true
 				this.$emit('tabs-fixed')
 			},
 			onScoll(e) {
@@ -116,27 +120,71 @@
 			onScrollToTop() {
 				this.$refs.swiper[this.current].scrollToTop()
 				this.$emit('scroll-to-top')
-				setTimeout(() => this.scrollable = false)
+				setTimeout(() => this.scrollable.value = false)
+			},
+			initObserver() {
+				this.disconnectObserver('contentObserver');
+				this.$uGetRect('.' + this.tabsClass).then((res) => {
+					this.tabsHeight = res.height;
+					this.tabsLeft = res.left;
+					this.tabsWidth = res.width;
+					this.$nextTick(() => {
+						this.observeContent();
+					});
+				});
+			},
+			observeContent() {
+				this.disconnectObserver('contentObserver');
+				const contentObserver = this.createIntersectionObserver({
+					thresholds: [0.95, 0.98, 0.99, 1]
+				});
+				const stickyTop = this.topHeight + 2;
+				contentObserver.relativeToViewport({
+					top: -stickyTop
+				});
+				contentObserver.observe('.' + this.tabsClass, res => {
+					console.log(`contentObserver.observe`, res);
+					const top = res.boundingClientRect.top
+					const fixed = top <= stickyTop;
+					if (fixed) {
+						this.onTabsFixed(top);
+						// this.$emit('fixed', this.index);
+					} else if (this.fixed) {
+						// this.$emit('unfixed', this.index);
+					}
+				});
+				this.contentObserver = contentObserver;
+			},
+			disconnectObserver(observerName) {
+				const observer = this[observerName];
+				observer && observer.disconnect();
 			},
 		},
+		beforeDestroy() {
+			this.disconnectObserver('contentObserver');
+		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	.good-swiper-wrapper {
 		--unit-20rpx: 20rpx;
-	}
-
-	.swiper {
 		// 44px IOS , 48px Android是uview中navbar固定高度
 		--delta-navbar-height: 48px;
 
-		// 80rpx是tabsSwiper里面固定高度
-		--delta-tabs-height: 80rpx;
-
 		// 50px是uview中tabbar固定高度
-		--delta-tabbar-height: 50px;
 
-		height: calc(100vh - var(--delta-status-bar-height) - var(--delta-navbar-height) - var(--delta-tabs-height) - var(--delta-tabbar-height));
+		--safe-bottom: calc(constant(safe-area-inset-bottom));
+		--safe-bottom: calc(env(safe-area-inset-bottom));
+		--delta-tabbar-height: calc(50px);
+
+		display: flex;
+		flex-direction: column;
+		height: calc(100vh - var(--delta-status-bar-height) - var(--delta-navbar-height) - var(--delta-tabbar-height) - var(--safe-bottom));
+	}
+
+	.swiper {
+		// height: calc(100vh - var(--delta-status-bar-height) - var(--delta-navbar-height) - var(--delta-tabs-height) - var(--delta-tabbar-height));
+		flex: 1;
 	}
 </style>

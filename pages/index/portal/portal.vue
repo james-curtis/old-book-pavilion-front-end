@@ -1,7 +1,7 @@
 <template>
 	<layout-default>
 		<location-header></location-header>
-		<view class="wrapper" v-show="isBlockShow">
+		<view class="wrapper">
 			<view class="content-wrapper">
 				<view class="search-bar-block block">
 					<search-bar class="search-bar" :disabled='true'></search-bar>
@@ -40,12 +40,31 @@
 			PortalGrid,
 			GoodSwiper
 		},
+		provide() {
+			return {
+				swiperScrollable: this.scrollable
+			}
+		},
 		data() {
 			return {
 				data: Swiper_mfw_index_data,
 				bannerList: [],
 				isBlockShow: true,
-				pageScrollTop: 0
+				pageScrollTop: 0,
+				scrollable: {
+					value: false
+				},
+			}
+		},
+		watch: {
+			scrollable: {
+				deep: true,
+				immediate: true,
+				handler({
+					value
+				}) {
+					this.isBlockShow = !value
+				}
 			}
 		},
 		computed: {

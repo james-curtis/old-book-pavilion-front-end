@@ -48,7 +48,7 @@
 
 		// 防止中间凸出按钮遮挡图层
 		/deep/ .u-fixed-placeholder.safe-area-inset-bottom {
-			height: 50px #{!important};
+			// height: 50rpx #{!important};
 		}
 	}
 </style>

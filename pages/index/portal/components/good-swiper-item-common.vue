@@ -1,8 +1,9 @@
 <template>
 	<view class='item-common-wrapper'>
 		<z-paging ref="paging" :use-virtual-list='true' cell-height-mode="fixed" @scroll='onScoll' virtual-list-col='2'
-			:scrollable='scrollable' v-model="pagingList" @query="queryList" :paging-content-style="pagingContentStyle"
-			:safe-area-inset-bottom='true' :refresher-complete-delay='300' :inner-list-style='innerListStyle'
+			:scrollable='swiperScrollable.value' v-model="pagingList" @query="queryList"
+			:paging-content-style="pagingContentStyle" :safe-area-inset-bottom='true' :refresher-complete-delay='300'
+			:inner-list-style='innerListStyle' @scrolltoupper='onScrolltoupper' :refresher-enabled='false'
 			:inner-cell-style="innerCellStyle">
 			<template #cell='{item,index}'>
 				<good-list-item :good='item'></good-list-item>
@@ -21,6 +22,14 @@
 		components: {
 			PortalGrid
 		},
+		inject: {
+			swiperScrollable: {
+				// 从good-swiper.vue中提供
+				default: () => ({
+					value: false
+				})
+			}
+		},
 		data() {
 			return {
 				innerListStyle: {
@@ -36,6 +45,7 @@
 					padding: '0 0 calc(var(--app-page-gap) * 2) 0'
 				},
 				pagingList: [],
+				_scrollable: false,
 			}
 		},
 		props: {
@@ -43,13 +53,12 @@
 				type: Function,
 				required: true
 			},
-			scrollable: {
-				type: Boolean,
-				default: true
-			}
 		},
 		mounted() {},
 		methods: {
+			onScrolltoupper() {
+				this.swiperScrollable.value = false
+			},
 			queryList(page, size) {
 				this.loadmore(page, size).then(res => {
 					this.$refs.paging.complete(res.records);

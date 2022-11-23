@@ -1,5 +1,5 @@
 <template>
-	<good-swiper-item-common ref="swiper" :loadmore='loadmore' @scroll='onScoll' :scrollable='scrollable'>
+	<good-swiper-item-common ref="swiper" :loadmore='loadmore' @scroll='onScoll'>
 	</good-swiper-item-common>
 </template>
 
@@ -12,12 +12,6 @@
 		name: 'GoodSwiperItemLatestGoods',
 		components: {
 			GoodSwiperItemCommon
-		},
-		props: {
-			scrollable: {
-				type: Boolean,
-				default: true
-			}
 		},
 		methods: {
 			loadmore(page, size) {
