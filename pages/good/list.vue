@@ -112,6 +112,6 @@
 	}
 
 	.fall {
-		z-index: -2;
+		// z-index: -2;
 	}
 </style>
