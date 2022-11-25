@@ -32,9 +32,7 @@
 				this.waterfallList = val
 			}
 		},
-		mounted() {
-			window.waterfall = this.$refs.waterfall
-		},
+		mounted() {},
 		methods: {
 			reload() {
 				console.log(111)
