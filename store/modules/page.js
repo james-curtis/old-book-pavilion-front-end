@@ -15,10 +15,10 @@ const state = {
 			pagePath: "/pages/user/cart",
 		},
 		{
-			iconPath: "/static/footer/min_button.png",
-			selectedIconPath: "/static/footer/min_button_select.png",
+			iconPath: "plus-circle",
+			selectedIconPath: "plus-circle-fill",
 			text: '卖书',
-			midButton: true,
+			// midButton: true,
 			pagePath: "/pages/index/publish",
 		},
 		{
@@ -42,6 +42,7 @@ const mutations = {
 		Object.assign(state, obj)
 	},
 	TOGGLE_MID_BUTTON(state) {
+		return false;
 		const saleBtn = state.pageList[2]
 		saleBtn.midButton = !saleBtn.midButton
 		if (saleBtn.midButton) {

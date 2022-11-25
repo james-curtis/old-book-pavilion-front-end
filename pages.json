@@ -87,7 +87,7 @@
 				"pagePath": "pages/index/portal/portal"
 			}, {
 				"text": "购物车",
-				"pagePath": "pages/index/cart"
+				"pagePath": "pages/user/cart"
 			},
 			{
 				"text": "卖书",
