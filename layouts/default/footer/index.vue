@@ -1,5 +1,5 @@
 <template>
-	<u-tabbar class='footer-tabbar' :list='pageList' v-model='current' :mid-button='true'></u-tabbar>
+	<u-tabbar class='footer-tabbar' :list='pageList' v-model='current' :mid-button='isMidButton'></u-tabbar>
 </template>
 
 <script>
@@ -22,7 +22,10 @@
 		computed: {
 			...mapState({
 				pageList: s => s.page.pageList
-			})
+			}),
+			isMidButton() {
+				return !!this.pageList.find(e => e.midButton === true)
+			}
 		},
 		watch: {
 			current: {
