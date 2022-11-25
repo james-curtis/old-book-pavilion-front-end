@@ -15,7 +15,7 @@
 
 <script>
 	export default {
-		name: 'PortalWaterfall',
+		name: 'GoodWaterfall',
 		data() {
 			return {
 				waterfallList: []

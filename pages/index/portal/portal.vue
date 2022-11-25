@@ -19,7 +19,7 @@
 			<u-sticky class='tabs-sticky'>
 				<z-tabs class='tabs-sticky__ztabs' :list="waterfallList" @change="onTabsChange" :is-scroll='false' />
 			</u-sticky>
-			<portal-waterfall ref="portalWaterfall" :list='dataList' />
+			<good-waterfall ref="portalWaterfall" :list='dataList' />
 		</z-paging>
 	</layout-default>
 </template>
@@ -37,14 +37,12 @@
 	} from '@/uni_modules/FatFatMeng-Swiper-mfw/components/FatFatMeng-Swiper-mfw/index.js'
 	import LayoutDefault from '@/layouts/default/index.vue'
 	import PortalGrid from './components/grid.vue'
-	import PortalWaterfall from './components/waterfall.vue'
 	export default {
 		// 首页
 		name: 'IndexPortal',
 		components: {
 			LayoutDefault,
 			PortalGrid,
-			PortalWaterfall,
 		},
 		data() {
 			return {

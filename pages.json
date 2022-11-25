@@ -58,7 +58,9 @@
 		{
 			"path": "pages/good/list",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "default",
+				"navigationBarTitleText": "商品列表",
+				"navigationBarBackgroundColor": "#fff"
 			}
 		},
 		{

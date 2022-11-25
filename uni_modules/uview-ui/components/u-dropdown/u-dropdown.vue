@@ -5,7 +5,8 @@
 		}" :class="{
 			'u-border-bottom': borderBottom
 		}">
-			<view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index" @tap.stop="menuClick(index)">
+			<view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index"
+				@tap.stop="menuClick(index)">
 				<view class="u-flex">
 					<text class="u-dropdown__menu__item__text" :style="{
 						color: item.disabled ? '#c0c4cc' : (index === current || highlightIndex == index) ? activeColor : inactiveColor,
@@ -14,7 +15,8 @@
 					<view class="u-dropdown__menu__item__arrow" :class="{
 						'u-dropdown__menu__item__arrow--rotate': index === current
 					}">
-						<u-icon :custom-style="{display: 'flex'}" :name="menuIcon" :size="$u.addUnit(menuIconSize)" :color="index === current || highlightIndex == index ? activeColor : '#c0c4cc'"></u-icon>
+						<u-icon :custom-style="{display: 'flex'}" :name="menuIcon" :size="$u.addUnit(menuIconSize)"
+							:color="index === current || highlightIndex == index ? activeColor : '#c0c4cc'"></u-icon>
 					</view>
 				</view>
 			</view>
@@ -23,8 +25,7 @@
 			transition: `opacity ${duration / 1000}s linear`,
 			top: $u.addUnit(height),
 			height: contentHeight + 'px'
-		}]"
-		 @tap="maskClick" @touchmove.stop.prevent>
+		}]" @tap="maskClick" @touchmove.stop.prevent>
 			<view @tap.stop.prevent class="u-dropdown__content__popup" :style="[popupStyle]">
 				<slot></slot>
 			</view>
@@ -121,7 +122,8 @@
 				// 外层内容的样式，初始时处于底层，且透明
 				contentStyle: {
 					zIndex: -1,
-					opacity: 0
+					opacity: 0,
+					display: 'none'
 				},
 				// 让某个菜单保持高亮的状态
 				highlightIndex: 99999,
@@ -171,7 +173,11 @@
 				this.open(index);
 			},
 			// 打开下拉菜单
-			open(index) {
+			async open(index) {
+				this.contentStyle = {
+					display: '',
+				}
+				await new Promise(res => setTimeout(() => res()))
 				// 重置高亮索引，否则会造成多个菜单同时高亮
 				// this.highlightIndex = 9999;
 				// 展开时，设置下拉内容的样式
@@ -189,7 +195,7 @@
 				this.$emit('open', this.current);
 			},
 			// 设置下拉菜单处于收起状态
-			close() {
+			async close() {
 				this.$emit('close', this.current);
 				// 设置为收起状态，同时current归位，设置为空字符串
 				this.active = false;
@@ -199,6 +205,11 @@
 					zIndex: -1,
 					opacity: 0
 				}
+				setTimeout(() => {
+					this.contentStyle = {
+						display: 'none',
+					}
+				}, this.duration)
 			},
 			// 点击遮罩
 			maskClick() {
@@ -273,7 +284,7 @@
 			left: 0px;
 			bottom: 0;
 			overflow: hidden;
-			
+
 
 			&__mask {
 				position: absolute;
