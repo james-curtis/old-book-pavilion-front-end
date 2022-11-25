@@ -52,7 +52,7 @@
 			}
 		},
 		{
-			"path": "pages/good/detail",
+			"path": "pages/good/detail/detail",
 			"style": {
 				"navigationStyle": "custom"
 			}

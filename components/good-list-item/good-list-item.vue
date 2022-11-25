@@ -1,12 +1,12 @@
 <template>
-	<view class="item-wrapper">
+	<view class="item-wrapper" @click="goDetailPage">
 		<u-image class='uv-image' :src="img" mode="widthFix" :fade="false" />
 		<text class="ellipis_text item-title">{{title}}</text>
 		<view class="item-desc">
 			<text class="item-desc__price">￥{{price}}</text>
 			<text class="item-desc__communicated">{{views}}沟通过</text>
 		</view>
-		<view class="item-owner">
+		<view class="item-owner" @click="goUserPage">
 			<u-avatar :src='user.avatar' size='50' />
 			<text class="item-owner__name">{{this.user.name}}</text>
 		</view>
@@ -27,10 +27,12 @@
 					id: 0,
 					name: '光速退学Y-_',
 					avatar: '/static/logo.png'
-				}
+				},
+				goodId: 0
 			}
 		},
 		created() {
+			this.goodId = this.id
 			this.views = this.good.views
 			this.title = this.good.title
 			this.img = this.good.cover
@@ -49,7 +51,16 @@
 			},
 		},
 		methods: {
-
+			goDetailPage() {
+				uni.navigateTo({
+					url: `/pages/good/detail/detail?id=${this.id}`
+				})
+			},
+			goUserPage() {
+				uni.navigateTo({
+					url: `/pages/user/index?id=${this.user.id}`
+				})
+			}
 		}
 	}
 </script>
