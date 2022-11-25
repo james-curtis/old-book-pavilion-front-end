@@ -1,6 +1,6 @@
 <template>
 	<view class="page-wrapper">
-		<search-bar class="search-bar block" @search='goSearchResult' />
+		<search-bar class="search-bar block" @search='goSearchResult' @custom='goSearchResult' />
 		<view class="cell block">
 			<view>历史搜索</view>
 			<view class="cell-list block">
@@ -86,6 +86,13 @@
 		},
 		methods: {
 			goSearchResult(keyword) {
+				if (keyword === '') {
+					uni.showToast({
+						title: '不能为空',
+						icon: 'error'
+					})
+					return;
+				}
 				uni.navigateTo({
 					url: `/pages/good/list?keyword=${keyword}`,
 				})

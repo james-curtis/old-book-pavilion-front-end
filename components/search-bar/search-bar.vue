@@ -1,7 +1,7 @@
 <template>
 	<view @click='onClick'>
-		<u-search :placeholder='placeholder' v-model='keyword' :margin='margin' :disabled='disabled'
-			:show-action='!disabled' :style='[style]'>
+		<u-search :placeholder='placeholder' v-model='keyword' :margin='margin' :disabled='disabled' @search="onSearch"
+			@custom="onSearch" :show-action='!disabled' :style='[style]'>
 		</u-search>
 	</view>
 </template>
@@ -50,6 +50,9 @@
 		methods: {
 			onClick() {
 				this.$emit('click')
+			},
+			onSearch(e) {
+				this.$emit('search', e)
 			}
 		},
 	}
