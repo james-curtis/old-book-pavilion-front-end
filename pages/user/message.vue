@@ -149,7 +149,7 @@
 				</view>
 
 				<view class="tn-flex tn-flex-col-top tn-margin tn-cat-shadow tn-padding"
-					v-for="(item,index) in dataList" :key="item.id" @click="tn('/messagePages/chat')">
+					v-for="(item,index) in dataList" :key="item.id" @click="tn('/pages/user/chat')">
 					<view class="">
 						<view class="logo-pic tn-shadow">
 							<view class="logo-image">

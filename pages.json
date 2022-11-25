@@ -36,7 +36,9 @@
 		{
 			"path": "pages/user/chat",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "default",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationBarTitleText": "聊天"
 			}
 		},
 		{
