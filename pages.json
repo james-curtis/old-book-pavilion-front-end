@@ -16,7 +16,9 @@
 		{
 			"path": "pages/index/category",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "default",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationBarTitleText": "分类"
 			}
 		},
 		{

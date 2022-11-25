@@ -9,7 +9,10 @@
 			<view class="content-wrapper">
 				<view class="search-bar-block block">
 					<search-bar class="search-bar" @click='goSearchPage' :disabled='true' />
-					<u-icon name="fenleiorguangchangorqitatianchong" custom-prefix="book-icon" size="40" color="#000" />
+					<navigator url="/pages/index/category">
+						<u-icon name="fenleiorguangchangorqitatianchong" custom-prefix="book-icon" size="40"
+							color="#000" />
+					</navigator>
 				</view>
 				<FatFatMeng-Swiper-mfw :list='data' />
 				<view class="block">

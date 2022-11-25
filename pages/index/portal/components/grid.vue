@@ -1,20 +1,8 @@
 <template>
-	<u-grid :col='4' class='' :border='false'>
-		<u-grid-item class='grid-nav'>
-			<image class="grid-nav__img" src="@/static/logo.png" mode="aspectFill"></image>
-			<text>图书分类</text>
-		</u-grid-item>
-		<u-grid-item class='grid-nav'>
-			<image class="grid-nav__img" src="@/static/logo.png" mode="aspectFill"></image>
-			<text>合作洽谈</text>
-		</u-grid-item>
-		<u-grid-item class='grid-nav'>
-			<image class="grid-nav__img" src="@/static/logo.png" mode="aspectFill"></image>
-			<text>邀请有奖</text>
-		</u-grid-item>
-		<u-grid-item class='grid-nav'>
-			<image class="grid-nav__img" src="@/static/logo.png" mode="aspectFill"></image>
-			<text>常见问题</text>
+	<u-grid :col='4' class='' :border='false' @click="onGridClick">
+		<u-grid-item class='grid-nav' v-for="(item,index) in list" :key="item.label" :index='index'>
+			<image class="grid-nav__img" :src="item.img" mode="aspectFill"></image>
+			<text>{{item.label}}</text>
 		</u-grid-item>
 	</u-grid>
 </template>
@@ -28,7 +16,25 @@
 		name: 'PortalGrid',
 		components: {},
 		data() {
-			return {}
+			return {
+				list: [{
+					label: '图书分类',
+					url: '/pages/index/category',
+					img: '/static/logo.png'
+				}, {
+					label: '合作洽谈',
+					url: '/pages/index/category',
+					img: '/static/logo.png'
+				}, {
+					label: '邀请有奖',
+					url: '/pages/index/category',
+					img: '/static/logo.png'
+				}, {
+					label: '常见问题',
+					url: '/pages/index/category',
+					img: '/static/logo.png'
+				}, ]
+			}
 		},
 		computed: {
 			...mapState({
@@ -36,7 +42,11 @@
 			})
 		},
 		methods: {
-
+			onGridClick(index) {
+				uni.navigateTo({
+					url: this.list[index].url
+				})
+			}
 		}
 	}
 </script>
