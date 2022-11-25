@@ -8,7 +8,7 @@
 			<location-header />
 			<view class="content-wrapper">
 				<view class="search-bar-block block">
-					<search-bar class="search-bar" :disabled='true' />
+					<search-bar class="search-bar" @click='goSearchPage' :disabled='true' />
 					<u-icon name="fenleiorguangchangorqitatianchong" custom-prefix="book-icon" size="40" color="#000" />
 				</view>
 				<FatFatMeng-Swiper-mfw :list='data' />
@@ -99,6 +99,11 @@
 			},
 			onRefresh() {
 				this.$refs.portalWaterfall.reload()
+			},
+			goSearchPage() {
+				uni.navigateTo({
+					url: '/pages/index/search'
+				})
 			}
 		},
 	}
@@ -112,10 +117,6 @@
 	}
 
 	.content-wrapper {
-		.block {
-			margin: 0 $app-page-gap;
-			box-sizing: border-box;
-		}
 
 		.search-bar-block {
 			display: flex;

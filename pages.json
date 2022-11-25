@@ -9,7 +9,8 @@
 		{
 			"path": "pages/index/search",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationBarBackgroundColor": "#fff",
+				"navigationBarTitleText": "搜索"
 			}
 		},
 		{

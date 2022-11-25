@@ -1,7 +1,9 @@
 <template>
-	<u-search :placeholder='placeholder' v-model='searchPwd' @click='onClick' :margin='margin' :disabled='disabled'
-		:show-action='!disabled'>
-	</u-search>
+	<view @click='onClick'>
+		<u-search :placeholder='placeholder' v-model='searchPwd' :margin='margin' :disabled='disabled'
+			:show-action='!disabled' :style='[style]'>
+		</u-search>
+	</view>
 </template>
 
 <script>
@@ -10,7 +12,7 @@
 		data() {
 			return {
 				placeholder: '书名/作者/ISBN',
-				searchPwd: ''
+				searchPwd: '',
 			}
 		},
 		props: {
@@ -23,9 +25,16 @@
 				default: false
 			}
 		},
+		computed: {
+			style() {
+				return this.disabled ? ({
+					'pointer-events': 'none'
+				}) : ({})
+			}
+		},
 		methods: {
-			onClick(e) {
-				this.$emit('click', e)
+			onClick() {
+				this.$emit('click')
 			}
 		},
 	}
