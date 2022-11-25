@@ -1,15 +1,13 @@
 <template>
-	<u-waterfall v-model="list">
-		<template v-slot:left="{leftList}">
-			<view v-for="(item, index) in leftList" :key="index">
+	<u-waterfall v-model="waterfallList" ref='waterfall'>
+		<template #left="{leftList}">
+			<view class="left-item item" v-for="(item, index) in leftList" :key="item.id">
 				<good-list-item :good='item'></good-list-item>
-				<!-- 这里编写您的内容，item为您传递给v-model的数组元素 -->
 			</view>
 		</template>
-		<template v-slot:right="{rightList}">
-			<view v-for="(item, index) in rightList" :key="index">
+		<template #right="{rightList}">
+			<view class="right-item item" v-for="(item, index) in rightList" :key="item.id">
 				<good-list-item :good='item'></good-list-item>
-				<!-- 这里编写您的内容，item为您传递给v-model的数组元素 -->
 			</view>
 		</template>
 	</u-waterfall>
@@ -19,7 +17,9 @@
 	export default {
 		name: 'PortalWaterfall',
 		data() {
-			return {}
+			return {
+				waterfallList: []
+			}
 		},
 		props: {
 			list: {
@@ -27,9 +27,34 @@
 				required: true
 			}
 		},
-		methods: {}
+		watch: {
+			list(val) {
+				this.waterfallList = val
+			}
+		},
+		mounted() {
+			window.waterfall = this.$refs.waterfall
+		},
+		methods: {
+			reload() {
+				console.log(111)
+				this.$refs.waterfall.clear()
+			}
+		}
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	.left-item {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	.right-item {
+		margin-right: 10px;
+	}
+
+	.item {
+		margin-bottom: 20px;
+	}
 </style>

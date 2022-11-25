@@ -2,7 +2,7 @@
 	<layout-default>
 		<z-paging class='paging' ref="paging" v-model="dataList" :auto-clean-list-when-reload="false"
 			:refresher-complete-delay='500' :min-delay='500' :auto-scroll-to-top-when-reload="false"
-			lower-threshold='750rpx' @query="queryList"
+			:created-reload='true' lower-threshold='750rpx' @query="queryList" @onRefresh='onRefresh'
 			:paging-style='{"padding-bottom":"calc(var(--delta-tabbar-height) + var(--safe-bottom))"}'
 			:loading-more-custom-style='{"margin-bottom":"25px"}'>
 			<location-header />
@@ -19,7 +19,7 @@
 			<u-sticky class='tabs-sticky'>
 				<z-tabs class='tabs-sticky__ztabs' :list="waterfallList" @change="onTabsChange" :is-scroll='false' />
 			</u-sticky>
-			<portal-waterfall :list='dataList' />
+			<portal-waterfall ref="portalWaterfall" :list='dataList' />
 		</z-paging>
 	</layout-default>
 </template>
@@ -93,9 +93,13 @@
 			},
 			onTabsChange(index) {
 				this.currentTab = index;
+				this.$refs.portalWaterfall.reload()
 				//当切换tab时请调用组件的reload方法，请勿直接调用：queryList方法！！
 				this.$refs.paging.reload();
 			},
+			onRefresh() {
+				this.$refs.portalWaterfall.reload()
+			}
 		},
 	}
 </script>

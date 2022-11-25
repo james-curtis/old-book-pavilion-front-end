@@ -1,11 +1,15 @@
 <template>
 	<view class="item-wrapper">
-		<u-image class='uv-image' :src="img" mode="widthFix">
-			<template #loading>
-				<u-loading #loading></u-loading>
-			</template>
-		</u-image>
-		<text class="ellipis_text">{{title}}</text>
+		<u-image class='uv-image' :src="img" mode="widthFix" :fade="false" />
+		<text class="ellipis_text item-title">{{title}}</text>
+		<view class="item-desc">
+			<text class="item-desc__price">￥{{price}}</text>
+			<text class="item-desc__communicated">{{views}}沟通过</text>
+		</view>
+		<view class="item-owner">
+			<u-avatar :src='user.avatar' size='50' />
+			<text class="item-owner__name">{{this.user.name}}</text>
+		</view>
 	</view>
 </template>
 
@@ -21,12 +25,19 @@
 				views: 88,
 				user: {
 					id: 0,
-					name: '光速退学Y-_'
+					name: '光速退学Y-_',
+					avatar: '/static/logo.png'
 				}
 			}
 		},
 		created() {
+			this.views = this.good.views
 			this.title = this.good.title
+			this.img = this.good.cover
+			this.price = this.good.price
+			this.user.avatar = this.good.avatar
+			this.user.id = this.good.userId
+			this.user.name = this.good.createBy
 		},
 		computed: {
 
@@ -44,6 +55,12 @@
 </script>
 
 <style lang="scss" scoped>
+	.item-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 5px
+	}
+
 	.ellipis_text {
 		overflow: hidden;
 		word-break: break-all;
@@ -51,5 +68,30 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
+	}
+
+	.item-desc {
+		&__price {
+			font-size: 20px;
+			font-weight: bold;
+		}
+
+		&__communicated {
+			font-size: 12px;
+			color: $u-tips-color;
+		}
+	}
+
+	.item-owner {
+		&__name {
+			color: $u-tips-color;
+		}
+	}
+
+	.item-desc,
+	.item-owner {
+		display: flex;
+		gap: 10px;
+		align-items: center;
 	}
 </style>
