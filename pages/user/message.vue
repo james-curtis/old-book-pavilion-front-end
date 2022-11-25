@@ -105,7 +105,7 @@
 									</view>
 									<view class="justify-content-item tn-color-gray tn-text-center tn-color-gray">
 										<text class="tn-icon-time tn-padding-right-xs tn-text-df"></text>
-										<text class="tn-text-sm">2022-10-25 16:27</text>
+										<text class="tn-text-sm">{{datetime()}}</text>
 									</view>
 								</view>
 							</view>
@@ -142,14 +142,14 @@
 							</view>
 							<view class="justify-content-item tn-color-gray tn-text-center tn-color-gray">
 								<text class="tn-icon-time tn-padding-right-xs tn-text-df"></text>
-								<text class="tn-text-sm">2022-10-25 16:27</text>
+								<text class="tn-text-sm">{{datetime()}}</text>
 							</view>
 						</view>
 					</view>
 				</view>
 
-				<view class="tn-flex tn-flex-col-top tn-margin tn-cat-shadow tn-padding" v-for="(item,index) in 28"
-					:key="index" @click="tn('/messagePages/chat')">
+				<view class="tn-flex tn-flex-col-top tn-margin tn-cat-shadow tn-padding"
+					v-for="(item,index) in dataList" :key="item.id" @click="tn('/messagePages/chat')">
 					<view class="">
 						<view class="logo-pic tn-shadow">
 							<view class="logo-image">
@@ -162,25 +162,25 @@
 					<view class="tn-padding-left-sm" style="width: 100%;">
 						<view class="tn-flex tn-flex-row-between tn-flex-col-between">
 							<view class="justify-content-item">
-								<text class="tn-color-cat tn-text-lg tn-text-bold">抓住那只猪</text>
-								<text class="tn-color-gray tn-padding-left-sm tn-padding-right-xs">市场经理</text>
+								<text class="tn-color-cat tn-text-lg tn-text-bold">{{item.createBy}}</text>
+								<text class="tn-color-gray tn-padding-left-sm tn-padding-right-xs">学生</text>
 							</view>
 							<!-- <view class="justify-content-item tn-round tn-text-xs tn-bg-gray--light tn-color-cat" style="padding: 10rpx 20rpx;">
               社 区
             </view> -->
 						</view>
 						<view class=" tn-padding-top-xs">
-							<text class="tn-color-gray">人生就是这样，得意淡然，失意坦然；喜而不狂，忧而不伤。</text>
+							<text class="tn-color-gray">{{item.summary}}</text>
 						</view>
 						<view class="tn-flex tn-flex-row-between tn-flex-col-between tn-margin-top-sm">
 							<view
 								class="justify-content-item tn-round tn-text-xs tn-bg-orangered--light tn-color-orangered"
 								style="padding: 5rpx 15rpx;">
-								<text class="tn-padding-right-xs">#</text> 5条未读消息
+								<text class="tn-padding-right-xs">#</text> {{item.views}}条未读消息
 							</view>
 							<view class="justify-content-item tn-color-gray tn-text-center tn-color-gray">
 								<text class="tn-icon-time tn-padding-right-xs tn-text-df"></text>
-								<text class="tn-text-sm">2022-10-25 16:27</text>
+								<text class="tn-text-sm">{{datetime()}}</text>
 							</view>
 						</view>
 					</view>
@@ -195,6 +195,12 @@
 </template>
 
 <script>
+	import {
+		datetime
+	} from '@/utils/mock.js'
+	import {
+		http
+	} from '@/utils/http.js'
 	import LayoutDefault from '@/layouts/default/index.vue'
 	export default {
 		name: 'UserMessage',
@@ -203,11 +209,11 @@
 		},
 		data() {
 			return {
-
+				dataList: []
 			}
 		},
-		onLoad() {
-
+		created() {
+			this.init()
 		},
 		methods: {
 			// 跳转
@@ -216,6 +222,12 @@
 					url: e,
 				});
 			},
+			async init() {
+				const res = await http.get('/messageList')
+				console.log(`res.result.records`, res);
+				this.dataList = res.data.result.records
+			},
+			datetime: () => datetime()
 		}
 	}
 </script>
