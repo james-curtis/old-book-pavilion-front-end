@@ -19,7 +19,7 @@
 		props: {
 			value: {
 				type: String,
-				default: '轻舟已过万重山'
+				default: '湖南工程学院'
 			}
 		},
 		watch: {
