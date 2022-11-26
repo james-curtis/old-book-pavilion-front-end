@@ -31,7 +31,7 @@ const state = {
 			iconPath: 'account',
 			selectedIconPath: 'account-fill',
 			text: '我的',
-			pagePath: "/pages/user/index"
+			pagePath: "/pages/user/index/index"
 		},
 	],
 	currentTab: 0

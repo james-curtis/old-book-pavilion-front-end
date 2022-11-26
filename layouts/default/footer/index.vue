@@ -1,5 +1,7 @@
 <template>
-	<u-tabbar class='footer-tabbar' :list='pageList' v-model='current' :mid-button='isMidButton'></u-tabbar>
+	<u-tabbar class='footer-tabbar' :list='pageList' v-model='current' :mid-button='isMidButton' active-color='#000'
+		inactiveColor="#9e9e9e">
+	</u-tabbar>
 </template>
 
 <script>
