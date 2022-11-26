@@ -20,19 +20,19 @@
 				list: [{
 					label: '图书分类',
 					url: '/pages/index/category',
-					img: '/static/logo.png'
+					img: '/static/index/portal/application.png'
 				}, {
 					label: '合作洽谈',
 					url: '/pages/index/category',
-					img: '/static/logo.png'
+					img: '/static/index/portal/info.png'
 				}, {
 					label: '邀请有奖',
 					url: '/pages/index/category',
-					img: '/static/logo.png'
+					img: '/static/index/portal/star.png'
 				}, {
 					label: '常见问题',
 					url: '/pages/index/category',
-					img: '/static/logo.png'
+					img: '/static/index/portal/question.png'
 				}, ]
 			}
 		},
