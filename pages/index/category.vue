@@ -23,7 +23,7 @@
 						</view>
 						<view class="item-container">
 							<view class="thumb-box" v-for="(item1, index1) in item.foods" :key="index1">
-								<image class="item-menu-image" :src="item1.icon" mode=""></image>
+								<image class="item-menu-image" v-if="item1.icon" :src="item1.icon" mode=""></image>
 								<view class="item-menu-name">{{item1.name}}</view>
 							</view>
 						</view>
@@ -45,1076 +45,529 @@
 				menuItemHeight: 0, // 左边菜单item的高度
 				itemId: '', // 栏目右边scroll-view用于滚动的id
 				tabbar: [{
-						"name": "女装",
+						"name": "教材",
 						"foods": [{
-								"name": "A字裙",
+								"name": "工学",
 								"key": "A字裙",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/1.jpg",
 								"cat": 10
 							},
 							{
-								"name": "T恤",
-								"key": "T恤",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/2.jpg",
+								"name": "理学",
+								"key": "理学",
 								"cat": 10
 							},
 							{
-								"name": "半身裙",
-								"key": "半身裙",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/3.jpg",
+								"name": "医学",
+								"key": "医学",
 								"cat": 10
 							},
 							{
-								"name": "衬衫",
-								"key": "衬衫",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/4.jpg",
+								"name": "农学",
+								"key": "农学",
 								"cat": 10
 							},
 							{
-								"name": "短裙",
-								"key": "短裙",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/5.jpg",
+								"name": "旅游",
+								"key": "旅游",
 								"cat": 10
 							},
 							{
-								"name": "阔腿裤",
-								"key": "阔腿裤",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/6.jpg",
+								"name": "外语",
+								"key": "外语",
 								"cat": 10
 							},
 							{
-								"name": "连衣裙",
-								"key": "连衣裙",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/7.jpg",
+								"name": "法律",
+								"key": "法律",
 								"cat": 10
 							},
 							{
-								"name": "妈妈装",
-								"key": "妈妈装",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/8.jpg",
+								"name": "数理化",
+								"key": "数理化",
 								"cat": 10
 							},
 							{
-								"name": "牛仔裤",
-								"key": "牛仔裤",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/9.jpg",
+								"name": "基础课",
+								"key": "基础课",
 								"cat": 10
 							},
 							{
-								"name": "情侣装",
-								"key": "情侣装",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/10.jpg",
+								"name": "财经类",
+								"key": "财经类",
 								"cat": 10
 							},
 							{
-								"name": "休闲裤",
-								"key": "休闲裤",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/11.jpg",
+								"name": "计算机",
+								"key": "计算机",
 								"cat": 10
 							},
 							{
-								"name": "雪纺衫",
-								"key": "雪纺衫",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/12.jpg",
+								"name": "公共课",
+								"key": "公共课",
 								"cat": 10
 							},
 							{
-								"name": "防晒衣",
-								"key": "防晒衣",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/13.jpg",
+								"name": "文法类",
+								"key": "文法类",
 								"cat": 10
 							},
 							{
-								"name": "礼服/婚纱",
-								"key": "礼服婚纱",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/1/14.jpg",
+								"name": "建筑工程",
+								"key": "建筑工程",
+								"cat": 10
+							},
+							{
+								"name": "交通运输",
+								"key": "交通运输",
+								"cat": 10
+							},
+							{
+								"name": "医药卫生",
+								"key": "医药卫生",
+								"cat": 10
+							},
+							{
+								"name": "电工电子",
+								"key": "电工电子",
+								"cat": 10
+							},
+							{
+								"name": "中职教材",
+								"key": "中职教材",
+								"cat": 10
+							},
+							{
+								"name": "经济管理类",
+								"key": "经济管理类",
+								"cat": 10
+							},
+							{
+								"name": "大学生素质教育",
+								"key": "大学生素质教育",
+								"cat": 10
+							},
+							{
+								"name": "高职高专教材",
+								"key": "高职高专教材",
+								"cat": 10
+							},
+							{
+								"name": "成人教育教材",
+								"key": "成人教育教材",
+								"cat": 10
+							},
+							{
+								"name": "职业技术培训教材",
+								"key": "职业技术培训教材",
+								"cat": 10
+							},
+							{
+								"name": "研究生/本科/专科教材",
+								"key": "研究生/本科/专科教材",
 								"cat": 10
 							}
 						]
 					},
 					{
-						"name": "美食",
+						"name": "成功/励志",
 						"foods": [{
-								"name": "火锅",
-								"key": "火锅",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/1.jpg",
+								"name": "人际交往",
+								"key": "人际交往",
 								"cat": 6
 							},
 							{
-								"name": "糕点饼干",
-								"key": "糕点饼干",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/2.jpg",
+								"name": "礼仪",
+								"key": "礼仪",
 								"cat": 6
 							},
 							{
-								"name": "坚果果干",
-								"key": "坚果果干",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/3.jpg",
+								"name": "人生哲学",
+								"key": "人生哲学",
 								"cat": 6
 							},
-							{
-								"name": "酒类",
-								"key": "酒类",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/4.jpg",
-								"cat": 6
-							},
-							{
-								"name": "辣条",
-								"key": "辣条",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/5.jpg",
-								"cat": 6
-							},
-							{
-								"name": "大礼包",
-								"key": "大礼包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/6.jpg",
-								"cat": 6
-							},
-							{
-								"name": "精品茗茶",
-								"key": "茶",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/7.jpg",
-								"cat": 6
-							},
-							{
-								"name": "休闲食品",
-								"key": "休闲食品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/8.jpg",
-								"cat": 6
-							},
-							{
-								"name": "糖果巧克力",
-								"key": "糖果巧克力",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/9.jpg",
-								"cat": 6
-							},
-							{
-								"name": "方便速食",
-								"key": "方便速食",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/10.jpg",
-								"cat": 6
-							},
-							{
-								"name": "营养代餐",
-								"key": "营养代餐",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/11.jpg",
-								"cat": 6
-							},
-							{
-								"name": "粮油副食",
-								"key": "粮油",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/12.jpg",
-								"cat": 6
-							},
-							{
-								"name": "生鲜水果",
-								"key": "水果",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/13.jpg",
-								"cat": 6
-							},
-							{
-								"name": "饮品",
-								"key": "饮品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/2/14.jpg",
-								"cat": 6
-							}
 						]
 					},
 					{
-						"name": "美妆",
+						"name": "文艺",
 						"foods": [{
-								"name": "化妆刷",
-								"key": "化妆刷",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/1.jpg",
+								"name": "摄影",
+								"key": "摄影",
 								"cat": 3
 							},
 							{
-								"name": "粉底",
-								"key": "粉底",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/2.jpg",
+								"name": "艺术",
+								"key": "艺术",
 								"cat": 3
 							},
 							{
-								"name": "洗发护发",
-								"key": "洗发护发",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/3.jpg",
+								"name": "传记",
+								"key": "传记",
 								"cat": 3
 							},
 							{
-								"name": "美容工具",
-								"key": "美容工具",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/4.jpg",
+								"name": "文学",
+								"key": "文学",
 								"cat": 3
 							},
-							{
-								"name": "眼部护理",
-								"key": "眼部护理",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/5.jpg",
-								"cat": 3
-							},
-							{
-								"name": "眉妆",
-								"key": "眉妆",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/6.jpg",
-								"cat": 3
-							},
-							{
-								"name": "卸妆品",
-								"key": "卸妆品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/7.jpg",
-								"cat": 3
-							},
-							{
-								"name": "基础护肤",
-								"key": "基础护肤",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/8.jpg",
-								"cat": 3
-							},
-							{
-								"name": "眼妆",
-								"key": "眼妆",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/9.jpg",
-								"cat": 3
-							},
-							{
-								"name": "唇妆",
-								"key": "唇妆",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/10.jpg",
-								"cat": 3
-							},
-							{
-								"name": "面膜",
-								"key": "面膜",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/11.jpg",
-								"cat": 3
-							},
-							{
-								"name": "沐浴用品",
-								"key": "沐浴用品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/12.jpg",
-								"cat": 3
-							},
-							{
-								"name": "护肤套装",
-								"key": "护肤套装",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/13.jpg",
-								"cat": 3
-							},
-							{
-								"name": "防晒品",
-								"key": "防晒品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/14.jpg",
-								"cat": 3
-							},
-							{
-								"name": "美甲",
-								"key": "美甲",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/3/15.jpg",
-								"cat": 3
-							}
-
 						]
 					},
 					{
-						"name": "居家日用",
+						"name": "童书",
 						"foods": [{
-								"name": "垃圾袋",
-								"key": "垃圾袋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/1.jpg",
+								"name": "3-6岁",
+								"key": "3-6岁",
 								"cat": 4
 							},
 							{
-								"name": "纸巾",
-								"key": "纸巾",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/2.jpg",
+								"name": "0-2岁",
+								"key": "0-2岁",
 								"cat": 4
 							},
 							{
-								"name": "驱蚊用品",
-								"key": "驱蚊用品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/3.jpg",
+								"name": "英语",
+								"key": "英语",
 								"cat": 4
 							},
 							{
-								"name": "收纳神器",
-								"key": "收纳神器",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/4.jpg",
+								"name": "文学",
+								"key": "文学",
 								"cat": 4
 							},
 							{
-								"name": "厨房用品",
-								"key": "厨房用品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/5.jpg",
+								"name": "绘本",
+								"key": "绘本",
 								"cat": 4
 							},
 							{
-								"name": "厨房烹饪",
-								"key": "烹饪",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/6.jpg",
+								"name": "11-14岁",
+								"key": "11-14岁",
 								"cat": 4
 							},
 							{
-								"name": "衣物晾晒",
-								"key": "衣物晾晒",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/7.jpg",
+								"name": "7-10岁",
+								"key": "7-10岁",
 								"cat": 4
 							},
 							{
-								"name": "衣物护理",
-								"key": "衣物护理",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/8.jpg",
+								"name": "科普/百科",
+								"key": "科普/百科",
 								"cat": 4
 							},
-							{
-								"name": "宠物用品",
-								"key": "宠物用品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/9.jpg",
-								"cat": 4
-							},
-							{
-								"name": "医药保健",
-								"key": "医药",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/10.jpg",
-								"cat": 4
-							},
-							{
-								"name": "日用百货",
-								"key": "百货",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/11.jpg",
-								"cat": 4
-							},
-							{
-								"name": "清洁用品",
-								"key": "清洁",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/12.jpg",
-								"cat": 4
-							},
-							{
-								"name": "绿植园艺",
-								"key": "绿植",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/4/13.jpg",
-								"cat": 4
-							}
 						]
 					},
 					{
-						"name": "男装",
+						"name": "人文社科",
 						"foods": [{
-								"name": "爸爸装",
-								"key": "爸爸装",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/1.jpg",
+								"name": "心理学",
+								"key": "心理学",
 								"cat": 12
 							},
 							{
-								"name": "牛仔裤",
-								"key": "牛仔裤",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/2.jpg",
+								"name": "社会科学",
+								"key": "社会科学",
 								"cat": 12
 							},
 							{
-								"name": "衬衫",
-								"key": "衬衫",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/3.jpg",
+								"name": "法律",
+								"key": "法律",
 								"cat": 12
 							},
 							{
-								"name": "休闲裤",
-								"key": "休闲裤",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/4.jpg",
+								"name": "文化",
+								"key": "文化",
 								"cat": 12
 							},
 							{
-								"name": "外套",
-								"key": "外套",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/5.jpg",
+								"name": "古籍",
+								"key": "古籍",
 								"cat": 12
 							},
 							{
-								"name": "T恤",
-								"key": "T恤",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/6.jpg",
+								"name": "历史",
+								"key": "历史",
 								"cat": 12
 							},
 							{
-								"name": "套装",
-								"key": "套装",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/7.jpg",
+								"name": "政治/军事",
+								"key": "政治/军事",
 								"cat": 12
 							},
 							{
-								"name": "运动裤",
-								"key": "运动裤",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/8.jpg",
+								"name": "哲学/宗教",
+								"key": "哲学/宗教",
 								"cat": 12
 							},
-							{
-								"name": "马甲/背心",
-								"key": "马甲背心",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/9.jpg",
-								"cat": 12
-							},
-							{
-								"name": "POLO衫",
-								"key": "POLO衫",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/10.jpg",
-								"cat": 12
-							},
-							{
-								"name": "商务装",
-								"key": "商务装",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/5/11.jpg",
-								"cat": 12
-							}
 						]
 					},
 					{
-						"name": "鞋品",
+						"name": "生活",
 						"foods": [{
-								"name": "单鞋",
-								"key": "单鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/1.jpg",
+								"name": "风水",
+								"key": "风水",
 								"cat": 5
 							},
 							{
-								"name": "皮鞋",
-								"key": "皮鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/2.jpg",
+								"name": "居家",
+								"key": "居家",
 								"cat": 5
 							},
 							{
-								"name": "帆布鞋",
-								"key": "帆布鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/3.jpg",
+								"name": "休闲",
+								"key": "休闲",
 								"cat": 5
 							},
 							{
-								"name": "北京老布鞋",
-								"key": "北京老布鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/4.jpg",
+								"name": "旅游",
+								"key": "旅游",
 								"cat": 5
 							},
 							{
-								"name": "运动鞋",
-								"key": "运动鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/5.jpg",
+								"name": "手工",
+								"key": "手工",
 								"cat": 5
 							},
 							{
-								"name": "拖鞋",
-								"key": "拖鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/6.jpg",
+								"name": "美食",
+								"key": "美食",
 								"cat": 5
 							},
 							{
-								"name": "凉鞋",
-								"key": "凉鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/7.jpg",
+								"name": "美妆",
+								"key": "美妆",
 								"cat": 5
 							},
 							{
-								"name": "休闲鞋",
-								"key": "休闲鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/8.jpg",
+								"name": "运动",
+								"key": "运动",
 								"cat": 5
 							},
 							{
-								"name": "高跟鞋",
-								"key": "高跟鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/9.jpg",
+								"name": "保健",
+								"key": "保健",
 								"cat": 5
 							},
 							{
-								"name": "老人鞋",
-								"key": "老人鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/10.jpg",
+								"name": "育儿",
+								"key": "育儿",
 								"cat": 5
 							},
 							{
-								"name": "懒人鞋",
-								"key": "懒人鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/6/11.jpg",
+								"name": "孕期",
+								"key": "孕期",
+								"cat": 5
+							},
+							{
+								"name": "两性",
+								"key": "两性",
+								"cat": 5
+							},
+							{
+								"name": "亲子/家教",
+								"key": "亲子/家教",
 								"cat": 5
 							}
 						]
 					},
 					{
-						"name": "数码家电",
+						"name": "经管",
 						"foods": [{
-								"name": "数据线",
-								"key": "数据线",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/1.jpg",
+								"name": "投资管理",
+								"key": "投资管理",
 								"cat": 8
 							},
 							{
-								"name": "耳机",
-								"key": "耳机",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/2.jpg",
+								"name": "管理",
+								"key": "管理",
 								"cat": 8
 							},
 							{
-								"name": "生活家电",
-								"key": "家电",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/3.jpg",
+								"name": "经济",
+								"key": "经济",
 								"cat": 8
 							},
-							{
-								"name": "电风扇",
-								"key": "电风扇",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/4.jpg",
-								"cat": 8
-							},
-							{
-								"name": "电吹风",
-								"key": "电吹风",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/5.jpg",
-								"cat": 8
-							},
-							{
-								"name": "手机壳",
-								"key": "手机壳",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/6.jpg",
-								"cat": 8
-							},
-							{
-								"name": "榨汁机",
-								"key": "榨汁机",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/7.jpg",
-								"cat": 8
-							},
-							{
-								"name": "小家电",
-								"key": "小家电",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/8.jpg",
-								"cat": 8
-							},
-							{
-								"name": "数码电子",
-								"key": "数码",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/9.jpg",
-								"cat": 8
-							},
-							{
-								"name": "电饭锅",
-								"key": "电饭锅",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/10.jpg",
-								"cat": 8
-							},
-							{
-								"name": "手机支架",
-								"key": "手机支架",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/11.jpg",
-								"cat": 8
-							},
-							{
-								"name": "剃须刀",
-								"key": "剃须刀",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/12.jpg",
-								"cat": 8
-							},
-							{
-								"name": "充电宝",
-								"key": "充电宝",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/13.jpg",
-								"cat": 8
-							},
-							{
-								"name": "手机配件",
-								"key": "手机配件",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/7/14.jpg",
-								"cat": 8
-							}
 						]
 					},
 					{
-						"name": "母婴",
+						"name": "科技",
 						"foods": [{
-								"name": "婴童服饰",
-								"key": "衣服",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/1.jpg",
+								"name": "工业",
+								"key": "工业",
 								"cat": 2
 							},
 							{
-								"name": "玩具乐器",
-								"key": "玩具乐器",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/2.jpg",
+								"name": "自然科学",
+								"key": "自然科学",
 								"cat": 2
 							},
 							{
-								"name": "尿不湿",
-								"key": "尿不湿",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/3.jpg",
+								"name": "农林",
+								"key": "农林",
 								"cat": 2
 							},
 							{
-								"name": "安抚牙胶",
-								"key": "安抚牙胶",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/4.jpg",
+								"name": "计算机",
+								"key": "计算机",
 								"cat": 2
 							},
 							{
-								"name": "奶瓶奶嘴",
-								"key": "奶瓶奶嘴",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/5.jpg",
+								"name": "医学",
+								"key": "医学",
 								"cat": 2
 							},
 							{
-								"name": "孕妈用品",
-								"key": "孕妈用品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/6.jpg",
+								"name": "建筑",
+								"key": "建筑",
 								"cat": 2
 							},
 							{
-								"name": "宝宝用品",
-								"key": "宝宝用品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/7.jpg",
+								"name": "科普",
+								"key": "科普",
 								"cat": 2
 							},
-							{
-								"name": "婴童湿巾",
-								"key": "湿巾",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/8.jpg",
-								"cat": 2
-							},
-							{
-								"name": "喂养洗护",
-								"key": "洗护",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/9.jpg",
-								"cat": 2
-							},
-							{
-								"name": "婴童鞋靴",
-								"key": "童鞋",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/10.jpg",
-								"cat": 2
-							},
-							{
-								"name": "口水巾",
-								"key": "口水巾",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/11.jpg",
-								"cat": 2
-							},
-							{
-								"name": "营养辅食",
-								"key": "营养",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/12.jpg",
-								"cat": 2
-							},
-							{
-								"name": "婴幼书籍",
-								"key": "书籍",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/13.jpg",
-								"cat": 2
-							},
-							{
-								"name": "婴儿车",
-								"key": "婴儿车",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/8/14.jpg",
-								"cat": 2
-							}
 						]
 					},
 					{
-						"name": "箱包",
+						"name": "青春文学",
 						"foods": [{
-								"name": "单肩包",
-								"key": "单肩包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/1.jpg",
+								"name": "影视写真",
+								"key": "影视写真",
 								"cat": 0
 							},
 							{
-								"name": "斜挎包",
-								"key": "斜挎包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/2.jpg",
+								"name": "校园",
+								"key": "校园",
 								"cat": 0
 							},
 							{
-								"name": "女包",
-								"key": "女包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/3.jpg",
+								"name": "古代言情",
+								"key": "古代言情",
 								"cat": 0
 							},
 							{
-								"name": "男包",
-								"key": "男包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/4.jpg",
+								"name": "爆笑/无厘头",
+								"key": "爆笑/无厘头",
 								"cat": 0
 							},
 							{
-								"name": "双肩包",
-								"key": "双肩包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/5.jpg",
+								"name": "娱乐/偶像",
+								"key": "娱乐/偶像",
 								"cat": 0
 							},
 							{
-								"name": "小方包",
-								"key": "小方包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/6.jpg",
+								"name": "穿越/重生/架空",
+								"key": "穿越/重生/架空",
 								"cat": 0
 							},
 							{
-								"name": "钱包",
-								"key": "钱包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/7.jpg",
+								"name": "叛逆/成长",
+								"key": "叛逆/成长",
 								"cat": 0
 							},
 							{
-								"name": "旅行箱包",
-								"key": "旅行箱包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/8.jpg",
+								"name": "爱情/情感",
+								"key": "爱情/情感",
 								"cat": 0
 							},
-							{
-								"name": "零钱包",
-								"key": "零钱包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/9.jpg",
-								"cat": 0
-							},
-							{
-								"name": "手提包",
-								"key": "手提包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/10.jpg",
-								"cat": 0
-							},
-							{
-								"name": "胸包",
-								"key": "胸包",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/9/11.jpg",
-								"cat": 0
-							}
 						]
 					},
 					{
-						"name": "内衣",
+						"name": "小说",
 						"foods": [{
-								"name": "袜子",
-								"key": "袜子",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/1.jpg",
+								"name": "官场小说",
+								"key": "官场小说",
 								"cat": 11
 							},
 							{
-								"name": "吊带背心",
-								"key": "吊带背心",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/2.jpg",
+								"name": "影视小说",
+								"key": "影视小说",
 								"cat": 11
 							},
 							{
-								"name": "抹胸",
-								"key": "抹胸",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/3.jpg",
+								"name": "历史",
+								"key": "历史",
 								"cat": 11
 							},
 							{
-								"name": "内裤",
-								"key": "内裤",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/4.jpg",
+								"name": "社会",
+								"key": "社会",
 								"cat": 11
 							},
 							{
-								"name": "文胸",
-								"key": "文胸",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/5.jpg",
+								"name": "情感",
+								"key": "情感",
 								"cat": 11
 							},
 							{
-								"name": "文胸套装",
-								"key": "文胸套装",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/6.jpg",
+								"name": "武侠",
+								"key": "武侠",
 								"cat": 11
 							},
 							{
-								"name": "打底塑身",
-								"key": "打底塑身",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/7.jpg",
+								"name": "职场小说",
+								"key": "职场小说",
 								"cat": 11
 							},
 							{
-								"name": "家居服",
-								"key": "家居服",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/8.jpg",
+								"name": "外国小说",
+								"key": "外国小说",
 								"cat": 11
 							},
 							{
-								"name": "船袜",
-								"key": "船袜",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/9.jpg",
+								"name": "四大名著",
+								"key": "四大名著",
 								"cat": 11
 							},
 							{
-								"name": "情侣睡衣",
-								"key": "情侣睡衣",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/10.jpg",
+								"name": "科幻小说",
+								"key": "科幻小说",
 								"cat": 11
 							},
 							{
-								"name": "丝袜",
-								"key": "丝袜",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/10/11.jpg",
+								"name": "世界名著",
+								"key": "世界名著",
+								"cat": 11
+							},
+							{
+								"name": "惊悚/恐怖",
+								"key": "惊悚/恐怖",
+								"cat": 11
+							},
+							{
+								"name": "侦探/悬疑",
+								"key": "侦探/悬疑",
 								"cat": 11
 							}
 						]
 					},
 					{
-						"name": "文娱车品",
+						"name": "教育",
 						"foods": [{
-								"name": "车市车品",
-								"key": "车市车品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/11/1.jpg",
+								"name": "工具书",
+								"key": "工具书",
 								"cat": 7
 							},
 							{
-								"name": "办公文具",
-								"key": "办公文具",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/11/2.jpg",
+								"name": "考试",
+								"key": "考试",
 								"cat": 7
 							},
 							{
-								"name": "考试必备",
-								"key": "考试必备",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/11/3.jpg",
+								"name": "外语",
+								"key": "外语",
 								"cat": 7
 							},
 							{
-								"name": "笔记本",
-								"key": "笔记本",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/11/4.jpg",
+								"name": "教材",
+								"key": "教材",
 								"cat": 7
 							},
 							{
-								"name": "艺术礼品",
-								"key": "礼品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/11/5.jpg",
+								"name": "中小学教辅",
+								"key": "中小学教辅",
 								"cat": 7
 							},
-							{
-								"name": "书写工具",
-								"key": "书写工具",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/11/6.jpg",
-								"cat": 7
-							},
-							{
-								"name": "车载电器",
-								"key": "车载电器",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/11/7.jpg",
-								"cat": 7
-							},
-							{
-								"name": "图书音像",
-								"key": "图书音像",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/11/8.jpg",
-								"cat": 7
-							},
-							{
-								"name": "画具画材",
-								"key": "画具画材",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/11/9.jpg",
-								"cat": 7
-							}
 						]
 					},
-					{
-						"name": "配饰",
-						"foods": [{
-								"name": "太阳镜",
-								"key": "太阳镜",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/1.jpg",
-								"cat": 0
-							},
-							{
-								"name": "皮带",
-								"key": "皮带",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/2.jpg",
-								"cat": 0
-							},
-							{
-								"name": "棒球帽",
-								"key": "棒球帽",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/3.jpg",
-								"cat": 0
-							},
-							{
-								"name": "手表",
-								"key": "手表",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/4.jpg",
-								"cat": 0
-							},
-							{
-								"name": "发饰",
-								"key": "发饰",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/5.jpg",
-								"cat": 0
-							},
-							{
-								"name": "项链",
-								"key": "项链",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/6.jpg",
-								"cat": 0
-							},
-							{
-								"name": "手饰",
-								"key": "手饰",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/7.jpg",
-								"cat": 0
-							},
-							{
-								"name": "耳环",
-								"key": "耳环",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/8.jpg",
-								"cat": 0
-							},
-							{
-								"name": "帽子丝巾",
-								"key": "帽子丝巾",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/9.jpg",
-								"cat": 0
-							},
-							{
-								"name": "眼镜墨镜",
-								"key": "眼镜墨镜",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/10.jpg",
-								"cat": 0
-							},
-							{
-								"name": "发带发箍",
-								"key": "发带发箍",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/12/11.jpg",
-								"cat": 0
-							}
-						]
-					},
-					{
-						"name": "家装家纺",
-						"foods": [{
-								"name": "家居饰品",
-								"key": "家居饰品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/1.jpg",
-								"cat": 0
-							},
-							{
-								"name": "凉席",
-								"key": "凉席",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/2.jpg",
-								"cat": 0
-							},
-							{
-								"name": "背枕靠枕",
-								"key": "靠枕",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/3.jpg",
-								"cat": 0
-							},
-							{
-								"name": "床上用品",
-								"key": "床上用品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/4.jpg",
-								"cat": 0
-							},
-							{
-								"name": "摆件",
-								"key": "摆件",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/5.jpg",
-								"cat": 0
-							},
-							{
-								"name": "四件套",
-								"key": "四件套",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/6.jpg",
-								"cat": 0
-							},
-							{
-								"name": "装饰品",
-								"key": "装饰品",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/7.jpg",
-								"cat": 0
-							},
-							{
-								"name": "卫浴用品",
-								"key": "卫浴",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/8.jpg",
-								"cat": 0
-							},
-							{
-								"name": "家居家装",
-								"key": "家具",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/9.jpg",
-								"cat": 0
-							},
-							{
-								"name": "蚊帐",
-								"key": "蚊帐",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/10.jpg",
-								"cat": 0
-							},
-							{
-								"name": "墙纸贴纸",
-								"key": "墙纸",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/11.jpg",
-								"cat": 0
-							},
-							{
-								"name": "空调被",
-								"key": "空调被",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/13/12.jpg",
-								"cat": 0
-							}
-						]
-					},
-					{
-						"name": "户外运动",
-						"foods": [{
-								"name": "游泳装备",
-								"key": "游泳",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/14/1.jpg",
-								"cat": 0
-							},
-							{
-								"name": "泳镜",
-								"key": "泳镜",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/14/2.jpg",
-								"cat": 0
-							},
-							{
-								"name": "户外装备",
-								"key": "户外",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/14/3.jpg",
-								"cat": 0
-							},
-							{
-								"name": "健身服饰",
-								"key": "健身",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/14/4.jpg",
-								"cat": 0
-							},
-							{
-								"name": "泳衣",
-								"key": "泳衣",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/14/5.jpg",
-								"cat": 0
-							},
-							{
-								"name": "瑜伽垫",
-								"key": "瑜伽垫",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/14/6.jpg",
-								"cat": 0
-							},
-							{
-								"name": "瑜伽用品",
-								"key": "瑜伽",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/14/7.jpg",
-								"cat": 0
-							},
-							{
-								"name": "健身装备",
-								"key": "健身",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/14/8.jpg",
-								"cat": 0
-							},
-							{
-								"name": "球迷用品",
-								"key": "球迷",
-								"icon": "https://cdn.uviewui.com/uview/common/classify/14/9.jpg",
-								"cat": 0
-							}
-						]
-					}
 				],
 				menuItemPos: [],
 				arr: [],
