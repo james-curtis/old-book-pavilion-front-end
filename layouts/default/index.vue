@@ -17,6 +17,8 @@
 
 <style lang='scss'>
 	.layout-default-wrapper {
+		display: flex;
+		flex-direction: column;
 		--app-page-gap: #{$app-page-gap};
 	}
 </style>

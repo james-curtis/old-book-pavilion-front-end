@@ -1,32 +1,40 @@
 <template>
 	<layout-default>
-		<location-header></location-header>
-		<view class="wrapper" v-show="isBlockShow">
+		<z-paging class='paging' ref="paging" v-model="dataList" :auto-clean-list-when-reload="false"
+			:refresher-complete-delay='500' :min-delay='500' :auto-scroll-to-top-when-reload="false"
+			:created-reload='true' lower-threshold='750rpx' @query="queryList" @onRefresh='onRefresh'
+			:paging-style='{"padding-bottom":"calc(var(--delta-tabbar-height) + var(--safe-bottom))"}'
+			:loading-more-custom-style='{"margin-bottom":"25px"}'>
+			<location-header />
 			<view class="content-wrapper">
 				<view class="search-bar-block block">
-					<search-bar class="search-bar" :disabled='true'></search-bar>
-					<u-icon name="fenleiorguangchangorqitatianchong" custom-prefix="book-icon" size="40" color="#000">
-					</u-icon>
+					<search-bar class="search-bar" @click='goSearchPage' :disabled='true' />
+					<navigator url="/pages/index/category">
+						<u-icon name="fenleiorguangchangorqitatianchong" custom-prefix="book-icon" size="40"
+							color="#000" />
+					</navigator>
 				</view>
-				<FatFatMeng-Swiper-mfw class='' :list='data'></FatFatMeng-Swiper-mfw>
-				<view class="block" id="portal-grid">
-					<portal-grid></portal-grid>
+				<FatFatMeng-Swiper-mfw :list='data' />
+				<view class="block">
+					<portal-grid />
 				</view>
 			</view>
-		</view>
-		<good-swiper @tabs-fixed='onTabsFixed' @scroll-to-top='onScrollToTop' :page-scroll-top='pageScrollTop'>
-		</good-swiper>
+			<u-sticky class='tabs-sticky'>
+				<z-tabs class='tabs-sticky__ztabs' :list="waterfallList" @change="onTabsChange" :is-scroll='false' />
+			</u-sticky>
+			<good-waterfall ref="portalWaterfall" :list='dataList' />
+		</z-paging>
 	</layout-default>
 </template>
 
 <script>
+	import * as PortalService from '@/services/portal.js'
 	import {
 		mapState
 	} from 'vuex'
 	import {
 		bannerList
 	} from '@/services/portal.js'
-	import GoodSwiper from './components/good-swiper.vue'
 	import {
 		Swiper_mfw_index_data
 	} from '@/uni_modules/FatFatMeng-Swiper-mfw/components/FatFatMeng-Swiper-mfw/index.js'
@@ -38,54 +46,79 @@
 		components: {
 			LayoutDefault,
 			PortalGrid,
-			GoodSwiper
 		},
 		data() {
 			return {
 				data: Swiper_mfw_index_data,
 				bannerList: [],
-				isBlockShow: true,
-				pageScrollTop: 0
+				dataList: [],
+
+				waterfallList: [{
+						name: '猜你喜欢',
+						api: PortalService.guessLike
+					},
+					{
+						name: '最新发布',
+						api: PortalService.latestGoods
+					},
+					{
+						name: '热门图书',
+						api: PortalService.hotGoods
+					},
+					{
+						name: '降价图书',
+						api: PortalService.saleGoods
+					},
+				],
+				currentTab: 0,
 			}
 		},
 		computed: {
 			...mapState({
 				cooperationLink: s => s.config.portal.cooperationLink
-			})
+			}),
+			waterfallLoadApi() {
+				return this.waterfallList[this.currentTab].api
+			}
 		},
 		async created() {
 			this.bannerList = await bannerList()
 		},
+		mounted() {},
 		methods: {
-			onTabsFixed() {
-				this.isBlockShow = false
+			queryList(page, size) {
+				this.waterfallLoadApi(page, size).then(res => {
+					this.$refs.paging.complete(res.records);
+				}, e => {
+					this.$refs.paging.complete(false);
+				})
 			},
-			onScrollToTop() {
-				this.isBlockShow = true
-				this.$nextTick(() => {
-					uni.pageScrollTo({
-						scrollTop: 0,
-						duration: 100,
-						complete: () => {
-							this.pageScrollTop = 0
-						}
-					})
+			onTabsChange(index) {
+				this.currentTab = index;
+				this.$refs.portalWaterfall.reload()
+				//当切换tab时请调用组件的reload方法，请勿直接调用：queryList方法！！
+				this.$refs.paging.reload();
+			},
+			onRefresh() {
+				this.$refs.portalWaterfall.reload()
+			},
+			goSearchPage() {
+				uni.navigateTo({
+					url: '/pages/index/search'
 				})
 			}
-		},
-		onPageScroll(e) {
-			if (this.isBlockShow)
-				this.pageScrollTop = e.scrollTop
 		},
 	}
 </script>
 
 <style lang="scss" scoped>
+	.paging {
+		--safe-bottom: calc(constant(safe-area-inset-bottom));
+		--safe-bottom: calc(env(safe-area-inset-bottom));
+		--delta-tabbar-height: calc(50px);
+	}
+
 	.content-wrapper {
-		.block {
-			margin: 0 $app-page-gap;
-			box-sizing: border-box;
-		}
 
 		.search-bar-block {
 			display: flex;
@@ -107,11 +140,15 @@
 		}
 	}
 
-	.grid-nav {
-		.grid-nav--img {
-			width: 100rpx;
-			height: 100rpx;
-			margin-bottom: 10rpx;
+	.tabs-sticky {
+		/deep/ .u-sticky {
+			// 防止在微信小程序下z-tabs塌陷
+			width: 100vw #{!important};
+		}
+
+		&__ztabs {
+			width: 750rpx #{!important};
+			height: 80rpx #{!important};
 		}
 	}
 </style>

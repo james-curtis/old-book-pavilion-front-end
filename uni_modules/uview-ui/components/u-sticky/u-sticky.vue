@@ -6,7 +6,7 @@
 		}">
 			<view class="u-sticky" :style="{
 				position: fixed ? 'fixed' : 'static',
-				top: offsetTop + 'px',
+				top: stickyTop + 'px',
 				left: left + 'px',
 				width: width == 'auto' ? 'auto' : width + 'px',
 				zIndex: uZIndex
@@ -35,13 +35,8 @@
 	export default {
 		name: "u-sticky",
 		props: {
-			// 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px。该项用于设置fixed的top偏移
+			// 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px
 			offsetTop: {
-				type: [Number, String],
-				default: 0
-			},
-			// 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px。该项用于距离判断
-			offsetTopForCheck: {
 				type: [Number, String],
 				default: 0
 			},
@@ -58,7 +53,7 @@
 			// h5顶部导航栏的高度
 			h5NavHeight: {
 				type: [Number, String],
-				default: 0
+				default: 44
 			},
 			// 吸顶区域的背景颜色
 			bgColor: {
@@ -105,20 +100,11 @@
 		methods: {
 			initObserver() {
 				if (!this.enable) return;
-				let offsetTop = this.offsetTopForCheck
-				if (Object.prototype.toString.call(offsetTop) === '[object String]') {
-					if (/\d+rpx/i.test(offsetTop)) {
-						offsetTop = uni.upx2px(offsetTop)
-					} else if (/\d+px/i.test(offsetTop)) {
-						offsetTop = Number(offsetTop.replace('px', ''))
-					}
-				}
 				// #ifdef H5
-				this.stickyTop = offsetTop != 0 ? offsetTop + Number(this.h5NavHeight) : this
-					.h5NavHeight;
+				this.stickyTop = this.offsetTop != 0 ? uni.upx2px(this.offsetTop) + this.h5NavHeight : this.h5NavHeight;
 				// #endif
 				// #ifndef H5
-				this.stickyTop = offsetTop != 0 ? offsetTop : 0;
+				this.stickyTop = this.offsetTop != 0 ? uni.upx2px(this.offsetTop) : 0;
 				// #endif
 
 				this.disconnectObserver('contentObserver');
@@ -134,20 +120,19 @@
 			observeContent() {
 				this.disconnectObserver('contentObserver');
 				const contentObserver = this.createIntersectionObserver({
-					thresholds: [0.95, 0.98, 0.99]
+					thresholds: [0.95, 0.98, 1]
 				});
 				contentObserver.relativeToViewport({
 					top: -this.stickyTop
 				});
 				contentObserver.observe('.' + this.elClass, res => {
-					console.log(`contentObserver.observe`, res);
 					if (!this.enable) return;
 					this.setFixed(res.boundingClientRect.top);
 				});
 				this.contentObserver = contentObserver;
 			},
 			setFixed(top) {
-				const fixed = top <= this.stickyTop;
+				const fixed = top < this.stickyTop;
 				if (fixed) this.$emit('fixed', this.index);
 				else if (this.fixed) this.$emit('unfixed', this.index);
 				this.fixed = fixed;

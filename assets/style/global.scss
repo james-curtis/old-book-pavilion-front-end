@@ -1,1 +1,6 @@
 $app-page-gap: 20rpx;
+
+.block {
+	margin: 0 $app-page-gap;
+	box-sizing: border-box;
+}

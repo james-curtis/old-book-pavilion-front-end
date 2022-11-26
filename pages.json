@@ -9,19 +9,16 @@
 		{
 			"path": "pages/index/search",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationBarBackgroundColor": "#fff",
+				"navigationBarTitleText": "搜索"
 			}
 		},
 		{
 			"path": "pages/index/category",
 			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/index/cart",
-			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "default",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationBarTitleText": "分类"
 			}
 		},
 		{
@@ -33,11 +30,20 @@
 		{
 			"path": "pages/user/chat",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "default",
+				"navigationBarBackgroundColor": "#fff",
+				"navigationBarTitleText": "聊天"
 			}
 		},
 		{
-			"path": "pages/user/index",
+			"path": "pages/user/cart",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#F3F3F3"
+			}
+		},
+		{
+			"path": "pages/user/index/index",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -49,7 +55,7 @@
 			}
 		},
 		{
-			"path": "pages/good/detail",
+			"path": "pages/good/detail/detail",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -57,11 +63,13 @@
 		{
 			"path": "pages/good/list",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "default",
+				"navigationBarTitleText": "商品列表",
+				"navigationBarBackgroundColor": "#fff"
 			}
 		},
 		{
-			"path": "pages/index/publish",
+			"path": "pages/index/publish/publish",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -79,11 +87,11 @@
 				"pagePath": "pages/index/portal/portal"
 			}, {
 				"text": "购物车",
-				"pagePath": "pages/index/cart"
+				"pagePath": "pages/user/cart"
 			},
 			{
 				"text": "卖书",
-				"pagePath": "pages/index/publish"
+				"pagePath": "pages/index/publish/publish"
 			},
 			{
 				"text": "消息",
@@ -91,7 +99,7 @@
 			},
 			{
 				"text": "我的",
-				"pagePath": "pages/user/index"
+				"pagePath": "pages/user/index/index"
 			}
 		]
 	}

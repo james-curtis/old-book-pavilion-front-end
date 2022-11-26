@@ -12,14 +12,14 @@ const state = {
 			iconPath: 'shopping-cart',
 			selectedIconPath: 'shopping-cart-fill',
 			text: '购物车',
-			pagePath: "/pages/index/cart"
+			pagePath: "/pages/user/cart",
 		},
 		{
-			iconPath: "/static/footer/min_button.png",
-			selectedIconPath: "/static/footer/min_button_select.png",
+			iconPath: "plus-circle",
+			selectedIconPath: "plus-circle-fill",
 			text: '卖书',
-			midButton: true,
-			pagePath: "/pages/index/publish",
+			// midButton: true,
+			pagePath: "/pages/index/publish/publish",
 		},
 		{
 			iconPath: 'chat',
@@ -31,7 +31,7 @@ const state = {
 			iconPath: 'account',
 			selectedIconPath: 'account-fill',
 			text: '我的',
-			pagePath: "/pages/user/index"
+			pagePath: "/pages/user/index/index"
 		},
 	],
 	currentTab: 0
@@ -40,6 +40,18 @@ const state = {
 const mutations = {
 	SET(state, obj) {
 		Object.assign(state, obj)
+	},
+	TOGGLE_MID_BUTTON(state) {
+		return false;
+		const saleBtn = state.pageList[2]
+		saleBtn.midButton = !saleBtn.midButton
+		if (saleBtn.midButton) {
+			saleBtn.iconPath = "/static/footer/min_button.png"
+			saleBtn.selectedIconPath = "/static/footer/min_button_select.png"
+		} else {
+			saleBtn.iconPath = "plus-circle"
+			saleBtn.selectedIconPath = "plus-circle-fill"
+		}
 	}
 }
 
