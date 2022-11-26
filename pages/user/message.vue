@@ -2,6 +2,19 @@
 	<layout-default>
 		<view class="message tn-safe-area-inset-bottom">
 
+			<!-- 顶部自定义导航 -->
+			<tn-nav-bar :isBack="false" :bottomShadow="false" backgroundColor="none">
+				<view class="custom-nav tn-flex tn-flex-col-center tn-flex-row-left" @click="tn('/minePages/message')">
+					<view class="custom-nav__back">
+						<view class="tn-icon-clear tn-color-cat" style="font-size: 50rpx;">
+							<!-- <tn-badge backgroundColor="#E72F8C" fontColor="#FFFFFF" :absolute="true" :translateCenter="false">
+              <text>12</text>
+            </tn-badge> -->
+						</view>
+					</view>
+				</view>
+			</tn-nav-bar>
+
 			<view class="tn-margin-top-sm tn-padding-bottom-lg">
 
 
