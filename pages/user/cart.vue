@@ -86,7 +86,7 @@
 				</view>
 				<view class="y-flex y-align-center y-font-size-28">
 					<view v-if="!isEdit" class="y-font-size-33"> 总计: <span class="color-price y-weight-bold y-m-l-8">￥
-							{{totalPrice}} </span> </view>
+							{{Number(totalPrice).toFixed(2)}} </span> </view>
 					<view class="y-flex y-m-l-25">
 						<u-button v-if="!isEdit" shape="circle" :hair-line="false" :customStyle="submitBtnStyle"> 结算(
 							{{totalSelCount}} )
