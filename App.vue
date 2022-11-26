@@ -1,6 +1,8 @@
 <script>
+	import tuniao from '@/mixins/tuniao.js'
 	export default {
-		name: 'App'
+		name: 'App',
+		mixins: [tuniao]
 	}
 </script>
 

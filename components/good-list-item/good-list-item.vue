@@ -7,8 +7,8 @@
 			<text class="item-desc__communicated">{{views}}沟通过</text>
 		</view>
 		<view class="item-owner" @click="goUserPage">
-			<u-avatar :src='user.avatar' size='50' />
-			<text class="item-owner__name">{{this.user.name}}</text>
+			<u-avatar :src='userInfo.avatar' size='50' />
+			<text class="item-owner__name">{{this.userInfo.name}}</text>
 		</view>
 	</view>
 </template>
@@ -23,7 +23,7 @@
 				price: 16.00,
 				// 浏览量
 				views: 88,
-				user: {
+				userInfo: {
 					id: 0,
 					name: '光速退学Y-_',
 					avatar: '/static/logo.png'
@@ -37,12 +37,9 @@
 			this.title = this.good.title
 			this.img = this.good.cover
 			this.price = this.good.price
-			this.user.avatar = this.good.avatar
-			this.user.id = this.good.userId
-			this.user.name = this.good.createBy
-		},
-		computed: {
-
+			this.userInfo.avatar = this.good.avatar
+			this.userInfo.id = this.good.userId
+			this.userInfo.name = this.good.createBy
 		},
 		props: {
 			good: {
@@ -58,7 +55,7 @@
 			},
 			goUserPage() {
 				uni.navigateTo({
-					url: `/pages/user/index?id=${this.user.id}`
+					url: `/pages/user/index?id=${this.userInfo.id}`
 				})
 			}
 		}

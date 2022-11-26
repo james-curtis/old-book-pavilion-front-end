@@ -84,6 +84,7 @@
 		async created() {
 			this.bannerList = await bannerList()
 		},
+		mounted() {},
 		methods: {
 			queryList(page, size) {
 				this.waterfallLoadApi(page, size).then(res => {

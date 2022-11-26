@@ -110,6 +110,9 @@
 			"treeShaking": {
 				"enable": true
 			}
+		},
+		"router": {
+			"mode": "history"
 		}
 	}
 }

@@ -1,13 +1,3 @@
-import {
-	mapState
-} from 'vuex'
-
-
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
-
 let lifeData = {}
 
 // 尝试获取本地是否存在lifeData变量，第一次启动时不存在
@@ -34,7 +24,7 @@ const saveLifeData = function(key, value) {
 	}
 }
 
-const store = new Vuex.Store({
+const store = {
 	state: {
 		// 如果上面从本地获取的lifeData对象下有对应的属性，就赋值给state中对应的变量
 		// 加上vuex_前缀，是防止变量名冲突，也让人一目了然
@@ -76,31 +66,6 @@ const store = new Vuex.Store({
 		}
 	},
 	actions: {}
-})
-
-// 尝试将用户在根目录中的store/index.js的vuex的state变量加载到全局变量中
-let $tStoreKey = []
-try {
-	$tStoreKey = store.state ? Object.keys(store.state) : []
-} catch (e) {
-
 }
 
-module.exports = {
-	beforeCreate() {
-		// 将vuex方法挂在在$t中
-		// 使用方法: 
-		// 修改vuex的state中的user.name变量为图鸟小菜 => this.$t.vuex('user.name', '图鸟小菜')
-		// 修改vuexde state中的version变量为1.0.1 => this.$t.vuex('version', 1.0.1)
-		this.$t.vuex = (name, value) => {
-			this.$store.commit('$tStore', {
-				name,
-				value
-			})
-		}
-	},
-	computed: {
-		// 将vuex的state中的变量结构到全局混入mixin中
-		...mapState($tStoreKey)
-	}
-}
+export default store
