@@ -5,7 +5,8 @@
 			<u-sticky h5-nav-height="0">
 				<view>
 					<view class="y-system-height bg-white"></view>
-					<view class="bg-white y-flex y-font-size-26 y-p-y-20 y-p-x-30 y-align-center y-justify-between">
+					<view class="bg-white y-flex y-font-size-26 y-p-y-20 y-p-x-30 y-align-center y-justify-between"
+						style="box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.07);">
 						<view class="w-90 y-flex y-justify-end" @click="isEdit = !isEdit">
 							<span v-if="!isEdit">编辑</span>
 							<span v-else>取消</span>
@@ -295,7 +296,6 @@
 
 <style>
 	page {
-		background-color: #F3F3F3;
 		color: #333333;
 	}
 </style>
@@ -494,5 +494,9 @@
 		height: 39rpx;
 		border-radius: 50%;
 		border: 1px solid rgb(235, 236, 238);
+	}
+
+	.store-single {
+		box-shadow: 0px 0px 26px 0px rgba(0, 0, 0, 0.07);
 	}
 </style>
