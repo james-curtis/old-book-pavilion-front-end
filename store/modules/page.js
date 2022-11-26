@@ -19,7 +19,7 @@ const state = {
 			selectedIconPath: "plus-circle-fill",
 			text: '卖书',
 			// midButton: true,
-			pagePath: "/pages/index/publish",
+			pagePath: "/pages/index/publish/publish",
 		},
 		{
 			iconPath: 'chat',

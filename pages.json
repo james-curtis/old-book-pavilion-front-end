@@ -69,7 +69,7 @@
 			}
 		},
 		{
-			"path": "pages/index/publish",
+			"path": "pages/index/publish/publish",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -91,7 +91,7 @@
 			},
 			{
 				"text": "卖书",
-				"pagePath": "pages/index/publish"
+				"pagePath": "pages/index/publish/publish"
 			},
 			{
 				"text": "消息",
