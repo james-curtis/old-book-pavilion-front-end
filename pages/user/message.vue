@@ -166,9 +166,10 @@
 					<view class="">
 						<view class="logo-pic tn-shadow">
 							<view class="logo-image">
-								<view class="tn-shadow-blur"
+								<u-avatar class="tn-shadow-blur" :src="item.avatar" size='100' />
+								<!-- <view class="tn-shadow-blur"
 									style="background-image:url('https://tnuiimage.tnkjapp.com/blogger/blogger_beibei.jpg');width: 100rpx;height: 100rpx;background-size: cover;">
-								</view>
+								</view> -->
 							</view>
 						</view>
 					</view>

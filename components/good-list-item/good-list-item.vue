@@ -3,7 +3,7 @@
 		<u-image class='uv-image' :src="img" mode="widthFix" :fade="false" />
 		<text class="ellipis_text item-title">{{title}}</text>
 		<view class="item-desc">
-			<text class="item-desc__price">￥{{price}}</text>
+			<text class="item-desc__price">￥{{Number(price).toFixed(2)}}</text>
 			<text class="item-desc__communicated">{{views}}沟通过</text>
 		</view>
 		<view class="item-owner" @click="goUserPage">
